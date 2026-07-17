@@ -15,17 +15,17 @@ CREATE TABLE courses (
 );
 
 CREATE TABLE assignments (
-    id SERIAL PRIMARY KEY,
+    assign_id SERIAL PRIMARY KEY,
     course_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    assign_name VARCHAR(255) NOT NULL,
     due_date TIMESTAMP,
     completed_date TIMESTAMP,
-    type VARCHAR(255),
-    priority VARCHAR(255),
-    status VARCHAR(255),
-    weight DECIMAL(5,2),
-    grade DECIMAL(5,2),
-    notes TEXT,
+    assign_type VARCHAR(255),
+    assign_priority VARCHAR(255),
+    assign_status VARCHAR(255),
+    assign_weight DECIMAL(5,2),
+    assign_grade DECIMAL(5,2),
+    assign_notes TEXT,
     FOREIGN KEY (course_id)
     REFERENCES courses(course_id)
 );

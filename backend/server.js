@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import "./database/connectDB.js";
-import routes from "./routes/courseRoutes.js"
+import courseRoutes from "./routes/courseRoutes.js"
+import assignRoutes from "./routes/assignmentRoutes.js"
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ const corsOptions = {origin: "*"};
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use("/", routes);
+app.use("/courses", courseRoutes);
+app.use("/assignments", assignRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

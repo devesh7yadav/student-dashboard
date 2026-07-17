@@ -12,7 +12,6 @@ const getAllCourses = async (req, res) => {
         );
         res.json(rows);
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({error : error.message});
     }
 };
@@ -43,7 +42,6 @@ const createCourse = async (req, res) => {
 
         return res.status(201).json(data.rows[0]);
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({error : error.message});
     }
 };
@@ -66,7 +64,6 @@ const deleteCourse = async (req, res) => {
         res.json({message: "Course deleted"});
 
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({error : error.message});
     }
 };
@@ -101,7 +98,6 @@ const editCourse = async (req, res) => {
         res.status(200).json(data.rows[0])
         
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({error : error.message});
     }
 };
