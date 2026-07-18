@@ -1,5 +1,6 @@
 import {query} from "../database/connectDB.js";
 
+//Returns all assignments in a course
 const getAllAssignments = async (req, res) => {
     try {
         const course_id = req.params.id;
@@ -16,11 +17,13 @@ const getAllAssignments = async (req, res) => {
     }
 };
 
+//Creates a new assignment
 const createAssignment = async (req, res) => {
     try {
         const course_id = req.params.id;
         const {assign_name, due_date, completed_date, assign_type, assign_priority, assign_status, assign_weight, assign_grade, assign_notes} = req.body;
 
+        //Check for a empty field
         if (!assign_name){
             return res.status(400).json({error: "Enter a name"})
         };
@@ -50,6 +53,7 @@ const createAssignment = async (req, res) => {
     }
 };
 
+//Deletes an assignment
 const deleteAssignment = async (req, res) => {
     try {
         const assign_id = req.params.id;
@@ -72,6 +76,7 @@ const deleteAssignment = async (req, res) => {
     }
 }
 
+//Edit an assignment
 const editAssignment = async (req, res) => {
     try {
         const assign_id = req.params.id;

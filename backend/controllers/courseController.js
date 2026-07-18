@@ -1,5 +1,6 @@
 import {query} from "../database/connectDB.js";
 
+//Returns all of a users courses
 const getAllCourses = async (req, res) => {
     try {
         const user_id = 1;
@@ -16,6 +17,7 @@ const getAllCourses = async (req, res) => {
     }
 };
 
+//Creates a new course
 const createCourse = async (req, res) => {
     try {
         //Placeholder
@@ -46,6 +48,7 @@ const createCourse = async (req, res) => {
     }
 };
 
+//Deletes a course 
 const deleteCourse = async (req, res) => {
     try {
         const course_id = req.params.id;
@@ -68,6 +71,7 @@ const deleteCourse = async (req, res) => {
     }
 };
 
+//Edit a course
 const editCourse = async (req, res) => {
     try {
         const course_id = req.params.id;

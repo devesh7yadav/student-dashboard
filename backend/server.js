@@ -15,6 +15,7 @@ const corsOptions = {origin: "*"};
 app.use(cors(corsOptions));
 app.use(express.json());
 
+//Routes
 app.use("/courses", courseRoutes);
 app.use("/assignments", assignRoutes);
 
