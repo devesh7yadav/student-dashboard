@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import AddCourse from "../components/AddCourse";
 
 function Courses() {
 
     //Hooks
-    const [course, setCourses] = useState([]);
+    const [courses, setCourses] = useState([]);
+    const [showForm, setShowForm] = useState(false);
 
+    //Displays the courses
     useEffect(() => {
         async function getCourses() {
             const response = await fetch("http://localhost:5002/courses");
@@ -16,27 +19,30 @@ function Courses() {
         getCourses();
     }, []);
 
-
-
     return(
       <div>
-        <table>
-            <thead>
+        <table className="border">
+            <thead className="border">
                 <tr>
                     <th>Course Code</th>
                     <th>Course Name</th>
                 </tr>
             </thead>
 
-            <tbody>
-                {course.map(course => (
-                    <tr key={course.course_id}>
-                        <td>{course.course_code}</td>
-                        <td>{course.course_name}</td>
+            <tbody className="border">
+                {courses.map(courses => (
+                    <tr key={courses.course_id} className="border">
+                        <td className="border">{courses.course_code}</td>
+                        <td>{courses.course_name}</td>
                     </tr>
                 ))}
             </tbody>
         </table>
+
+        <button className="border" onClick={() => setShowForm(true)}>Add Course</button>
+        {showForm && (
+            <AddCourse setCourses={setCourses} onClose={() => setShowForm(false)}/>
+        )}
       </div>  
     )
 }

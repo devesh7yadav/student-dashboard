@@ -21,7 +21,7 @@ const getAllCourses = async (req, res) => {
 const createCourse = async (req, res) => {
     try {
         //Placeholder
-        const user_id = 7;
+        const user_id = 1;
 
         const {course_code, course_name} = req.body;
 
