@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-function AddCourse ({setCourses, onClose}) {
+function EditCourse({course, displayCourses, onClose}) {
 
     //Hooks
     const [formData, setFormData] = useState({
-            course_code: "",
-            course_name: ""
+            course_id: course.course_id,
+            course_code: course.course_code,
+            course_name: course.course_name
         });
     const [message, setMessage] = useState(null);
 
@@ -19,8 +20,7 @@ function AddCourse ({setCourses, onClose}) {
         }));
     };
 
-    //Adds a new course
-    const handleSubmit = async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault();
 
         //Check for empty fields
@@ -29,8 +29,8 @@ function AddCourse ({setCourses, onClose}) {
             return;
         }
 
-        const response = await fetch("http://localhost:5002/courses", {
-            method: "POST",
+        const response = await fetch(`http://localhost:5002/courses/${formData.course_id}`, {
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 course_code: formData.course_code,
@@ -46,26 +46,13 @@ function AddCourse ({setCourses, onClose}) {
             return;
         }
 
-        handleReset();
-
-        //Add the course to the table
-        setCourses((prev) => [...prev, data]);
         onClose();
-    };
-
-    //Resets the form
-    const handleReset = () => {
-        setMessage(null);
-        setFormData({
-            course_code: "",
-            course_name: "",
-        })
+        displayCourses();
     }
 
-    return (
+    return(
         <div>
-            <form onSubmit={handleSubmit}>
-
+            <form onSubmit={handleEdit}>
                 <label htmlFor="course_code">Course Code: </label>
                 <input 
                     type="text" 
@@ -85,13 +72,11 @@ function AddCourse ({setCourses, onClose}) {
                 />
 
                 <button type="submit">Submit</button>
-                <button type="reset" onClick={handleReset}>Clear</button>
                 <button type="button" onClick={onClose}>Exit</button>
-
             </form>
             <p>{message}</p>
         </div>
     )
 }
 
-export default AddCourse;
+export default EditCourse;
