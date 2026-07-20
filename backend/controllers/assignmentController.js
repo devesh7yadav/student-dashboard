@@ -74,7 +74,7 @@ const deleteAssignment = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 //Edit an assignment
 const editAssignment = async (req, res) => {
@@ -110,11 +110,38 @@ const editAssignment = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
+
+const completeAssignment = async (req, res) => {
+    try {
+        const assign_id = req.params.id;
+
+        const data = await query (`
+            UPDATE assignments
+            SET
+            assign_status = 'Complete',
+            completed_date = NOW()
+
+            WHERE assign_id = $1
+            RETURNING *
+            `,
+            [assign_id]
+        );
+
+        if (data.rowCount === 0){
+            return res.status(404).json({error: "Assignment not updated"})
+        };
+        
+        res.status(200).json(data.rows[0])
+    } catch (error) {
+        return res.status(500).json({error : error.message});
+    }
+};
 
 export {
     getAllAssignments,
     createAssignment,
     deleteAssignment,
-    editAssignment
+    editAssignment,
+    completeAssignment
 }

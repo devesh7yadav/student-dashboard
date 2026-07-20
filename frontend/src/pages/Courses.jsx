@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import AddCourse from "../components/AddCourse";
-import EditCourse from "../components/EditCourse";
-import DeleteCourse from "../components/DeleteCourse";
+import AddCourse from "../components/courses/AddCourse";
+import EditCourse from "../components/courses/EditCourse";
+import DeleteCourse from "../components/courses/DeleteCourse";
 
 function Courses() {
 
