@@ -46,8 +46,8 @@ function EditCourse({course, displayCourses, onClose}) {
             return;
         }
 
-        onClose();
         displayCourses();
+        onClose();
     }
 
     return(

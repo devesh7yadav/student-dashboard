@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AddCourse from "../components/AddCourse";
 import EditCourse from "../components/EditCourse";
+import DeleteCourse from "../components/DeleteCourse";
 
 function Courses() {
 
@@ -8,6 +9,7 @@ function Courses() {
     const [courses, setCourses] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
     const [courseInfo, setCourseInfo] = useState(null);
 
     //Displays the courses
@@ -54,6 +56,14 @@ function Courses() {
                                 Edit
                             </button>
                         </td>
+                        <td>
+                            <button onClick={() => {
+                                setShowDelete(true);
+                                setCourseInfo(course);
+                            }}>
+                                Delete
+                            </button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
@@ -66,6 +76,10 @@ function Courses() {
 
         {showEdit && (
             <EditCourse course={courseInfo} displayCourses={displayCourses} onClose={() => setShowEdit(false)}/>
+        )}
+
+        {showDelete && (
+            <DeleteCourse course={courseInfo} displayCourses={displayCourses} onClose={() => setShowDelete(false)}/>
         )}
       </div>  
       
