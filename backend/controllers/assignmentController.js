@@ -39,12 +39,24 @@ const getCourseAssignments = async (req, res) => {
 const createAssignment = async (req, res) => {
     try {
         const course_id = req.params.id;
-        const {assign_name, due_date, completed_date, assign_type, assign_priority, assign_status, assign_weight, assign_grade, assign_notes} = req.body;
+        const {assign_name, completed_date, assign_type, assign_priority, assign_status, assign_notes} = req.body;
+        let {due_date, assign_weight, assign_grade} = req.body;
 
         //Check for a empty field
         if (!assign_name){
             return res.status(400).json({error: "Enter a name"})
         };
+
+        //Change empty string to null
+        if (due_date == ""){
+            due_date = null;
+        } 
+        if (assign_weight == ""){
+            assign_weight = null;
+        } 
+        if (assign_grade == ""){
+            assign_grade = null;
+        } 
 
         const data = await query(`
             INSERT INTO assignments (course_id, assign_name, due_date, completed_date, assign_type, assign_priority, assign_status, assign_weight, assign_grade, assign_notes)
