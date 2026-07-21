@@ -1,7 +1,25 @@
 import {query} from "../database/connectDB.js";
 
-//Returns all assignments in a course
+//Returns all assignments
 const getAllAssignments = async (req, res) => {
+    try {
+        const {rows} = await query (`
+            SELECT 
+                assignments.*,
+                courses.course_code
+            FROM assignments
+            JOIN courses
+            ON assignments.course_id = courses.course_id
+            `
+        );
+        res.json(rows);
+    } catch (error) {
+        return res.status(500).json({error : error.message});
+    }
+}
+
+//Returns all assignments in a course
+const getCourseAssignments = async (req, res) => {
     try {
         const course_id = req.params.id;
 
@@ -140,6 +158,7 @@ const completeAssignment = async (req, res) => {
 
 export {
     getAllAssignments,
+    getCourseAssignments,
     createAssignment,
     deleteAssignment,
     editAssignment,
