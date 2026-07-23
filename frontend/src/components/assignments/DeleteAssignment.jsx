@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-function DeleteCourse({course, onClose}) {
+function DeleteAssignment({assignment, onClose}) {
 
     const [message, setMessage] = useState(null);
 
     const handleDelete = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`http://localhost:5002/courses/${course.course_id}`, {
+        const response = await fetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
             method: "DELETE",
         });
 
@@ -22,16 +22,17 @@ function DeleteCourse({course, onClose}) {
         onClose();
     }
 
-    return(
+    return (
         <div>
             <form onSubmit={handleDelete}>
-                <p>Are you sure you want to delete {course.course_code}?</p>
+                <p>Are you sure you want to delete {assignment.assign_name}?</p>
                 <button type="button" onClick={onClose}>No</button>
                 <button type="submit">Yes</button>
                 <p>{message}</p>
             </form>
         </div>
     )
+
 }
 
-export default DeleteCourse;
+export default DeleteAssignment;

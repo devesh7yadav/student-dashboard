@@ -75,11 +75,17 @@ function Courses() {
         )}
 
         {showEdit && (
-            <EditCourse course={courseInfo} displayCourses={displayCourses} onClose={() => setShowEdit(false)}/>
+            <EditCourse course={courseInfo} onClose={() => {
+                setShowEdit(false);
+                displayCourses();
+            }}/>
         )}
 
         {showDelete && (
-            <DeleteCourse course={courseInfo} displayCourses={displayCourses} onClose={() => setShowDelete(false)}/>
+            <DeleteCourse course={courseInfo} onClose={() => {
+                setShowDelete(false);
+                displayCourses();
+            }}/>
         )}
       </div>  
       

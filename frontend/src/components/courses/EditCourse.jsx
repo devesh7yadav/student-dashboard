@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function EditCourse({course, displayCourses, onClose}) {
+function EditCourse({course, onClose}) {
 
     //Hooks
     const [formData, setFormData] = useState({
@@ -46,7 +46,6 @@ function EditCourse({course, displayCourses, onClose}) {
             return;
         }
 
-        displayCourses();
         onClose();
     }
 

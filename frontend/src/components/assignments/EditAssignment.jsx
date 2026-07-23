@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-function AddAssignment({courses, setAssignments, onClose}) {
+function EditAssignment({assignment, onClose}) {
 
     //Hooks
     const [formData, setFormData] = useState({
-            course_id: "",
-            assign_name: "",
-            due_date: "",
-            assign_type: "",
-            assign_priority: "",
-            assign_status: "",
-            assign_weight: "",
-            assign_notes: ""
-        });
+        course_id: assignment.course_id,
+        due_date: assignment.due_date ? assignment.due_date.slice(0,16) : "",
+        assign_name: assignment.assign_name,
+        assign_type: assignment.assign_type,
+        assign_priority: assignment.assign_priority,
+        assign_status: assignment.assign_status,
+        assign_weight: assignment.assign_weight,
+        assign_notes: assignment.assign_notes
+    })
     const [message, setMessage] = useState(null);
 
     //Updates the textboxes
@@ -25,17 +25,17 @@ function AddAssignment({courses, setAssignments, onClose}) {
         }));
     };
 
-    //Adds a new assignments
-    const handleSubmit = async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault();
 
+        //Check for empty fields
         if (!formData.assign_name){
             setMessage("Enter a name");
             return;
         }
 
-        const response = await fetch(`http://localhost:5002/assignments/${formData.course_id}`, {
-            method: "POST",
+        const response = await fetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 assign_name: formData.assign_name,
@@ -56,44 +56,13 @@ function AddAssignment({courses, setAssignments, onClose}) {
             return;
         }
 
-        handleReset();
-
-        //Add the assignment to the table
-        setAssignments((prev) => [...prev, data]);
         onClose();
     }
 
-     //Resets the form
-    const handleReset = () => {
-        setMessage(null);
-        setFormData({
-            course_id: "",
-            assign_name: "",
-            due_date: "",
-            assign_type: "",
-            assign_priority: "",
-            assign_status: "",
-            assign_weight: "",
-            assign_notes: ""
-        })
-    }
-
+    console.log(assignment.due_date);
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-
-                <label htmlFor="course_id">Course:</label>
-                <select 
-                    name="course_id" 
-                    id="course_id"
-                    value={formData.course_id}
-                    onChange={handleChange}
-                >
-                    <option value="">Select a course</option>
-                {courses.map(course => (
-                    <option key={course.course_id} value={course.course_id}>{course.course_code}</option>
-                ))}
-                </select>
+            <form onSubmit={handleEdit}>
 
                 <label htmlFor="assign_name">Name:</label>
                 <input 
@@ -178,13 +147,11 @@ function AddAssignment({courses, setAssignments, onClose}) {
                 />
 
                 <button type="submit">Submit</button>
-                <button type="reset" onClick={handleReset}>Clear</button>
                 <button type="button" onClick={onClose}>Exit</button>
-
             </form>
             <p>{message}</p>
         </div>
     )
 }
 
-export default AddAssignment;
+export default EditAssignment;

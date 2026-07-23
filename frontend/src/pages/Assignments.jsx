@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import AddAssignment from "../components/assignments/addAssignment";
+import EditAssignment from "../components/assignments/EditAssignment";
+import DeleteAssignment from "../components/assignments/DeleteAssignment";
 
 function Assignments() {
 
@@ -7,6 +9,9 @@ function Assignments() {
     const [assignments, setAssignments] = useState([]);
     const [courses, setCourses] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [assignmentInfo, setAssignmentInfo] = useState(null);
 
     //Displays the assignments
     useEffect(() => {
@@ -40,6 +45,10 @@ function Assignments() {
     }, []);
 
     const displayDate = (date) => {
+        if (date == null){
+            return "No due date";
+        }
+
         return new Date(date).toLocaleString(undefined, {
             month: "short",
             day: "numeric",
@@ -62,6 +71,7 @@ function Assignments() {
                         <th className="border">Status</th>
                         <th className="border">Weight (%)</th>
                         <th className="border">Notes</th>
+                        <th className="border">---</th>
                     </tr>
                 </thead>
 
@@ -76,7 +86,22 @@ function Assignments() {
                             <td className="border">{assignment.assign_status}</td>
                             <td className="border">{assignment.assign_weight}</td>
                             <td className="border">{assignment.assign_notes}</td>
-
+                            <td>
+                                <button onClick={() => {
+                                    setShowEdit(true);
+                                    setAssignmentInfo(assignment);
+                                }}>
+                                    Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button onClick={() => {
+                                    setShowDelete(true);
+                                    setAssignmentInfo(assignment);
+                                }}>
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -88,6 +113,18 @@ function Assignments() {
                     setShowForm(false); 
                     getAssignments();
                 }}/>
+            )}
+            {showEdit && (
+                <EditAssignment assignment={assignmentInfo} onClose={() => {
+                    setShowEdit(false); 
+                    getAssignments();
+                }}/>
+            )}
+            {showDelete && (
+                <DeleteAssignment assignment={assignmentInfo} onClose={() => {
+                    setShowDelete(false); 
+                    getAssignments();
+                }} />
             )}
         </div>
     )
