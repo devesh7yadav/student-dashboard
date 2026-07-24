@@ -6,6 +6,7 @@ import "./database/connectDB.js";
 import courseRoutes from "./routes/courseRoutes.js"
 import assignRoutes from "./routes/assignmentRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const corsOptions = {origin: "*"};
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 //Routes
 app.use("/courses", courseRoutes);

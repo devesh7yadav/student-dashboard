@@ -1,6 +1,7 @@
 import {query} from "../database/connectDB.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { jwtTokens } from "../utils/jwtHelper.js";
 
 //Returns all users
 const getUsers = async (req, res) => {
@@ -58,7 +59,42 @@ const loginUser = async (req, res) => {
         if(!validPassword) {
             return res.status(401).json({error: "Incorrect Password"});
         }
-        return res.status(200).json("Success");
+        
+        //JWT Token
+        let tokens = jwtTokens(users.rows[0]);
+        res.cookie('refresh_token', tokens.refreshToken, {httpOnly:true});
+        res.json(tokens);
+
+    } catch (error) {
+        return res.status(500).json({error : error.message});
+    }
+}
+
+//Refreshes the token
+const refreshUserToken = async (req, res) => {
+    try {
+        const refreshToken = req.cookies.refresh_token;
+        if (!refreshToken) {
+            return res.status(401).json({error: "Null refresh token"});
+        }
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
+            if (error) {
+                return res.status(403).json({error: error.meesage});
+            }
+            let tokens = jwtTokens(user);
+            res.cookie('refresh_token', tokens.refreshToken, {httpOnly:true});
+            res.json(tokens);
+        })
+    } catch (error) {
+        return res.status(500).json({error : error.message});
+    }
+}
+
+//Logs a user out
+const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie('refresh_token');
+        return res.status(200).json({message: 'Refresh token deleted'})
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
@@ -67,5 +103,7 @@ const loginUser = async (req, res) => {
 export {
     getUsers,
     createUser,
-    loginUser
+    loginUser,
+    refreshUserToken,
+    logoutUser
 }
