@@ -2,7 +2,8 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE courses (
@@ -12,6 +13,7 @@ CREATE TABLE courses (
     course_name VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id)
     REFERENCES users(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE assignments (
@@ -19,7 +21,7 @@ CREATE TABLE assignments (
     course_id INT NOT NULL,
     assign_name VARCHAR(255) NOT NULL,
     due_date TIMESTAMP,
-    completed_date TIMESTAMP,
+    completed_date TIMESTAMPTZ,
     assign_type VARCHAR(255),
     assign_priority VARCHAR(255),
     assign_status VARCHAR(255),
@@ -28,4 +30,5 @@ CREATE TABLE assignments (
     assign_notes TEXT,
     FOREIGN KEY (course_id)
     REFERENCES courses(course_id)
+    ON DELETE CASCADE
 );

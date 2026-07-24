@@ -1,0 +1,10 @@
+- Fix the date (install the date-fns libary to handle it)
+
+- Add a complete assignment feature
+- Add a view completed assignments section
+
+- Add a gradebook
+
+- Add authentication
+
+- Delete a course even if there are assignments
