@@ -3,7 +3,7 @@ import {query} from "../database/connectDB.js";
 //Returns all of a users courses
 const getAllCourses = async (req, res) => {
     try {
-        const user_id = 1;
+        const user_id = req.user.id;
 
         const {rows} = await query(`
             SELECT * FROM courses
@@ -20,8 +20,7 @@ const getAllCourses = async (req, res) => {
 //Creates a new course
 const createCourse = async (req, res) => {
     try {
-        //Placeholder
-        const user_id = 1;
+        const user_id = req.user.id;
 
         const {course_code, course_name} = req.body;
 

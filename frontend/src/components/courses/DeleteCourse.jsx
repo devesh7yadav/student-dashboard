@@ -7,8 +7,13 @@ function DeleteCourse({course, onClose}) {
     const handleDelete = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("accessToken");
         const response = await fetch(`http://localhost:5002/courses/${course.course_id}`, {
             method: "DELETE",
+            credentials: "include",
+            headers: {  
+                "Authorization": `Bearer ${token}`
+            },
         });
 
         const data = await response.json();

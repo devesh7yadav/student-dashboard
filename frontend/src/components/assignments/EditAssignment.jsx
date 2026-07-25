@@ -12,7 +12,7 @@ function EditAssignment({assignment, onClose}) {
         assign_status: assignment.assign_status,
         assign_weight: assignment.assign_weight,
         assign_notes: assignment.assign_notes
-    })
+    });
     const [message, setMessage] = useState(null);
 
     //Updates the textboxes
@@ -34,9 +34,14 @@ function EditAssignment({assignment, onClose}) {
             return;
         }
 
+        const token = localStorage.getItem("accessToken");
         const response = await fetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
             body: JSON.stringify({
                 assign_name: formData.assign_name,
                 due_date: formData.due_date,
@@ -57,7 +62,7 @@ function EditAssignment({assignment, onClose}) {
         }
 
         onClose();
-    }
+    };
 
     console.log(assignment.due_date);
     return (

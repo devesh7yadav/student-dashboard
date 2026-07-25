@@ -1,11 +1,12 @@
 import express from "express";
 import { getAllCourses, createCourse, deleteCourse, editCourse } from "../controllers/courseController.js"
+import { authenticateToken } from "../middleware/authorization.js";
 
 const router = express.Router();
 
-router.get("/", getAllCourses);
-router.post("/",  createCourse);
-router.delete("/:id", deleteCourse);
-router.put("/:id", editCourse);
+router.get("/", authenticateToken, getAllCourses);
+router.post("/", authenticateToken, createCourse);
+router.delete("/:id", authenticateToken, deleteCourse);
+router.put("/:id", authenticateToken, editCourse);
 
 export default router;

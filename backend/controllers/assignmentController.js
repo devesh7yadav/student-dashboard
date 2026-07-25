@@ -3,6 +3,8 @@ import {query} from "../database/connectDB.js";
 //Returns all assignments
 const getAllAssignments = async (req, res) => {
     try {
+        const user_id = req.user.id;
+
         const {rows} = await query (`
             SELECT 
                 assignments.*,
@@ -10,7 +12,9 @@ const getAllAssignments = async (req, res) => {
             FROM assignments
             JOIN courses
             ON assignments.course_id = courses.course_id
-            `
+            WHERE user_id = $1
+            `,
+            [user_id]
         );
         res.json(rows);
     } catch (error) {

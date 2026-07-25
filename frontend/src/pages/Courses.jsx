@@ -15,7 +15,12 @@ function Courses() {
     //Displays the courses
     useEffect(() => {
         async function getCourses() {
-            const response = await fetch("http://localhost:5002/courses");
+            const token = localStorage.getItem("accessToken");
+            const response = await fetch("http://localhost:5002/courses", {
+                headers: { 
+                    "Authorization": `Bearer ${token}`
+                },
+            });
             const data = await response.json();
 
             setCourses(data);
@@ -25,7 +30,12 @@ function Courses() {
     }, []);
 
     async function displayCourses() {
-        const response = await fetch("http://localhost:5002/courses");
+        const token = localStorage.getItem("accessToken");
+        const response = await fetch("http://localhost:5002/courses", {
+            headers: {  
+                "Authorization": `Bearer ${token}`
+            },
+        });
         const data = await response.json();
 
         setCourses(data);

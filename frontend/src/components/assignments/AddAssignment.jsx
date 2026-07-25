@@ -4,15 +4,15 @@ function AddAssignment({courses, setAssignments, onClose}) {
 
     //Hooks
     const [formData, setFormData] = useState({
-            course_id: "",
-            assign_name: "",
-            due_date: "",
-            assign_type: "",
-            assign_priority: "",
-            assign_status: "",
-            assign_weight: "",
-            assign_notes: ""
-        });
+        course_id: "",
+        assign_name: "",
+        due_date: "",
+        assign_type: "",
+        assign_priority: "",
+        assign_status: "",
+        assign_weight: "",
+        assign_notes: ""
+    });
     const [message, setMessage] = useState(null);
 
     //Updates the textboxes
@@ -34,9 +34,14 @@ function AddAssignment({courses, setAssignments, onClose}) {
             return;
         }
 
+        const token = localStorage.getItem("accessToken");
         const response = await fetch(`http://localhost:5002/assignments/${formData.course_id}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
             body: JSON.stringify({
                 assign_name: formData.assign_name,
                 due_date: formData.due_date,
@@ -61,9 +66,9 @@ function AddAssignment({courses, setAssignments, onClose}) {
         //Add the assignment to the table
         setAssignments((prev) => [...prev, data]);
         onClose();
-    }
+    };
 
-     //Resets the form
+    //Resets the form
     const handleReset = () => {
         setMessage(null);
         setFormData({
@@ -76,7 +81,7 @@ function AddAssignment({courses, setAssignments, onClose}) {
             assign_weight: "",
             assign_notes: ""
         })
-    }
+    };
 
     return (
         <div>

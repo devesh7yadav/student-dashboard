@@ -16,7 +16,12 @@ function Assignments() {
     //Displays the assignments
     useEffect(() => {
         async function getAssignments() {
-            const response = await fetch("http://localhost:5002/assignments");
+            const token = localStorage.getItem("accessToken");
+            const response = await fetch("http://localhost:5002/assignments", {
+                headers: {  
+                    "Authorization": `Bearer ${token}`
+                },
+            });
             const data = await response.json();
 
             setAssignments(data);
@@ -26,7 +31,12 @@ function Assignments() {
     }, [])
 
     async function getAssignments() {
-        const response = await fetch("http://localhost:5002/assignments");
+        const token = localStorage.getItem("accessToken");
+        const response = await fetch("http://localhost:5002/assignments", {
+            headers: {  
+                "Authorization": `Bearer ${token}`
+            },
+        });
         const data = await response.json();
 
         setAssignments(data);
@@ -35,7 +45,12 @@ function Assignments() {
     //Displays the courses
     useEffect(() => {
         async function getCourses() {
-            const response = await fetch("http://localhost:5002/courses");
+            const token = localStorage.getItem("accessToken");
+            const response = await fetch("http://localhost:5002/courses", {
+                headers: {  
+                    "Authorization": `Bearer ${token}`
+                },
+            });
             const data = await response.json();
 
             setCourses(data);
