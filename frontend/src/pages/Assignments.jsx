@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AddAssignment from "../components/assignments/addAssignment";
 import EditAssignment from "../components/assignments/EditAssignment";
 import DeleteAssignment from "../components/assignments/DeleteAssignment";
+import apiFetch from "../utils/apiFetch.js";
 
 function Assignments() {
 
@@ -16,12 +17,7 @@ function Assignments() {
     //Displays the assignments
     useEffect(() => {
         async function getAssignments() {
-            const token = localStorage.getItem("accessToken");
-            const response = await fetch("http://localhost:5002/assignments", {
-                headers: {  
-                    "Authorization": `Bearer ${token}`
-                },
-            });
+            const response = await apiFetch("http://localhost:5002/assignments");
             const data = await response.json();
 
             setAssignments(data);
@@ -31,12 +27,7 @@ function Assignments() {
     }, [])
 
     async function getAssignments() {
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch("http://localhost:5002/assignments", {
-            headers: {  
-                "Authorization": `Bearer ${token}`
-            },
-        });
+        const response = await apiFetch("http://localhost:5002/assignments");
         const data = await response.json();
 
         setAssignments(data);

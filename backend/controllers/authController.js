@@ -79,11 +79,11 @@ const refreshUserToken = async (req, res) => {
         }
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
             if (error) {
-                return res.status(403).json({error: error.meesage});
+                return res.status(403).json({error: error.message});
             }
             let tokens = jwtTokens(user);
             res.cookie('refresh_token', tokens.refreshToken, {httpOnly:true});
-            res.json(tokens);
+            res.json({accessToken: tokens.accessToken});
         })
     } catch (error) {
         return res.status(500).json({error : error.message});

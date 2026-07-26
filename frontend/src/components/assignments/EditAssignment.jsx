@@ -1,4 +1,5 @@
 import { useState } from "react";
+import apiFetch from "../../utils/apiFetch.js";
 
 function EditAssignment({assignment, onClose}) {
 
@@ -34,13 +35,10 @@ function EditAssignment({assignment, onClose}) {
             return;
         }
 
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
+        const response = await apiFetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
             method: "PUT",
-            credentials: "include",
             headers: { 
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Content-Type": "application/json", 
             },
             body: JSON.stringify({
                 assign_name: formData.assign_name,

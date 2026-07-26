@@ -1,4 +1,5 @@
 import { useState } from "react";
+import apiFetch from "../../utils/apiFetch.js";
 
 function DeleteAssignment({assignment, onClose}) {
 
@@ -7,14 +8,10 @@ function DeleteAssignment({assignment, onClose}) {
     const handleDelete = async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
+        const response = await apiFetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
             method: "DELETE",
-            credentials: "include",
-            headers: {  
-                "Authorization": `Bearer ${token}`
-            },
         });
+
 
         const data = await response.json();
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import apiFetch from "../../utils/apiFetch.js";
 
 function AddCourse ({setCourses, onClose}) {
 
@@ -23,21 +24,16 @@ function AddCourse ({setCourses, onClose}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData);
-
         //Check for empty fields
         if (formData.course_code === "" || formData.course_name === ""){
             setMessage("Missing fields");
             return;
         }
 
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch("http://localhost:5002/courses", {
+        const response = await apiFetch("http://localhost:5002/courses", {
             method: "POST",
-            credentials: "include",
             headers: { 
                 "Content-Type": "application/json", 
-                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 course_code: formData.course_code,

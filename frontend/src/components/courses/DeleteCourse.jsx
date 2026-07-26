@@ -1,4 +1,5 @@
 import { useState } from "react";
+import apiFetch from "../../utils/apiFetch.js";
 
 function DeleteCourse({course, onClose}) {
 
@@ -7,13 +8,8 @@ function DeleteCourse({course, onClose}) {
     const handleDelete = async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch(`http://localhost:5002/courses/${course.course_id}`, {
+        const response = await apiFetch(`http://localhost:5002/courses/${course.course_id}`, {
             method: "DELETE",
-            credentials: "include",
-            headers: {  
-                "Authorization": `Bearer ${token}`
-            },
         });
 
         const data = await response.json();

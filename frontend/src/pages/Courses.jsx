@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AddCourse from "../components/courses/AddCourse";
 import EditCourse from "../components/courses/EditCourse";
 import DeleteCourse from "../components/courses/DeleteCourse";
+import apiFetch from "../utils/apiFetch.js";
 
 function Courses() {
 
@@ -15,12 +16,7 @@ function Courses() {
     //Displays the courses
     useEffect(() => {
         async function getCourses() {
-            const token = localStorage.getItem("accessToken");
-            const response = await fetch("http://localhost:5002/courses", {
-                headers: { 
-                    "Authorization": `Bearer ${token}`
-                },
-            });
+            const response = await apiFetch("http://localhost:5002/courses");
             const data = await response.json();
 
             setCourses(data);
@@ -30,12 +26,7 @@ function Courses() {
     }, []);
 
     async function displayCourses() {
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch("http://localhost:5002/courses", {
-            headers: {  
-                "Authorization": `Bearer ${token}`
-            },
-        });
+        const response = await apiFetch("http://localhost:5002/courses");
         const data = await response.json();
 
         setCourses(data);
