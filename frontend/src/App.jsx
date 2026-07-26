@@ -1,8 +1,9 @@
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
 import Assignments from "./pages/Assignments";
 import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -11,8 +12,9 @@ function App() {
   
   return (
     <div>
+
       {location.pathname !== "/login" && (
-        <Link to="/">Go Home</Link>
+        <Navbar />
       )}
 
       <Routes>
@@ -25,4 +27,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
