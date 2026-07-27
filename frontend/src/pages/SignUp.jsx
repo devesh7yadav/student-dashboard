@@ -2,14 +2,15 @@ import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom";
 import apiFetch from "../utils/apiFetch.js";
 
-function Login() {
+function SignUp() {
 
     const navigate = useNavigate();
 
     //Hooks
     const [formData, setFormData] = useState({
         email: "",
-        password: ""
+        password: "",
+        password_check: ""
     });
     const [message, setMessage] = useState(null);
 
@@ -29,12 +30,15 @@ function Login() {
 
         setMessage(null);
 
-        if (!formData.email || !formData.password){
+        if (!formData.email || !formData.password || !formData.password_check){
             setMessage("Fill all fields");
+            return;
+        } else if (formData.password !== formData.password_check) {
+            setMessage("Passwords don't match");
             return;
         }
 
-        const response = await apiFetch("http://localhost:5002/auth/login", {
+        const response = await apiFetch("http://localhost:5002/auth/create", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -51,16 +55,15 @@ function Login() {
             return;
         }
 
-        localStorage.setItem("accessToken", data.accessToken);
-        navigate("/");
+        navigate("/login");
     };
 
-    return (
+    return(
         <div>
-            <h1>Login</h1>
+            <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
 
-                <label htmlFor="email">Email: </label>
+                <label htmlFor="email">Enter a Email: </label>
                 <input 
                     className="border"
                     type="email"
@@ -70,7 +73,7 @@ function Login() {
                     onChange={handleChange} 
                 />
 
-                <label htmlFor="password">Password: </label>
+                <label htmlFor="password">Enter a Password: </label>
                 <input 
                     className="border"
                     type="password"
@@ -80,17 +83,28 @@ function Login() {
                     onChange={handleChange} 
                 />
 
+                <label htmlFor="password_check">Retype Password: </label>
+                <input 
+                    className="border"
+                    type="password"
+                    id="password_check"
+                    name="password_check"
+                    value={formData.password_check}
+                    onChange={handleChange} 
+                />
+
                 <button type="submit">Submit</button>
 
             </form>
             <p>{message}</p>
 
             <div className="my-10">
-                <p>Don't have an account?</p>
-                <Link to="/signup">Sign Up</Link>
+                <p>Already have an account?</p>
+                <Link to="/login">Log In</Link>
             </div>
+
         </div>
     )
 }
 
-export default Login;
+export default SignUp;
