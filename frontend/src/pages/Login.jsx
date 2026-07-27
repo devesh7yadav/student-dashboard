@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom";
-import apiFetch from "../utils/apiFetch.js";
 
 function Login() {
 
@@ -34,14 +33,15 @@ function Login() {
             return;
         }
 
-        const response = await apiFetch("http://localhost:5002/auth/login", {
+        const response = await fetch("http://localhost:5002/auth/login", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 email: formData.email,
                 password: formData.password,
             }),
-        })
+        });
 
         const data = await response.json();
 

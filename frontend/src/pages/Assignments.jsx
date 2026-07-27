@@ -36,12 +36,7 @@ function Assignments() {
     //Displays the courses
     useEffect(() => {
         async function getCourses() {
-            const token = localStorage.getItem("accessToken");
-            const response = await fetch("http://localhost:5002/courses", {
-                headers: {  
-                    "Authorization": `Bearer ${token}`
-                },
-            });
+            const response = await apiFetch("http://localhost:5002/courses");
             const data = await response.json();
 
             setCourses(data);
@@ -50,6 +45,7 @@ function Assignments() {
         getCourses();
     }, []);
 
+    //Formats the due date
     const displayDate = (date) => {
         if (date == null){
             return "No due date";
@@ -62,6 +58,27 @@ function Assignments() {
             hour: "numeric",
             minute: "2-digit",
         });
+    }
+
+    //Updates the status
+    async function updateStatus(assignment) {
+        
+        const response = await apiFetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json", 
+            },
+            body: JSON.stringify({
+                ...assignment,
+                assign_status: assignment.assign_status,
+            }),
+        });
+
+        if (!response.ok) {
+            return;
+        }
+
+        await getAssignments();
     }
 
     return(
@@ -89,7 +106,24 @@ function Assignments() {
                             <td className="border">{displayDate(assignment.due_date)}</td>
                             <td className="border">{assignment.assign_type}</td>
                             <td className="border">{assignment.assign_priority}</td>
-                            <td className="border">{assignment.assign_status}</td>
+                            <td className="border">
+                                <select 
+                                    name="assign_status" 
+                                    id="assign_status"
+                                    value={assignment.assign_status}
+                                    onChange={(e) => {
+                                        updateStatus({
+                                            ...assignment,
+                                            assign_status: e.target.value,
+                                        });
+                                    }}
+                                >
+                                    <option value=""></option>
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </td>
                             <td className="border">{assignment.assign_weight}</td>
                             <td className="border">{assignment.assign_notes}</td>
                             <td>

@@ -62,7 +62,6 @@ function EditAssignment({assignment, onClose}) {
         onClose();
     };
 
-    console.log(assignment.due_date);
     return (
         <div>
             <form onSubmit={handleEdit}>
@@ -116,19 +115,6 @@ function EditAssignment({assignment, onClose}) {
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
-                </select>
-
-                <label htmlFor="assign_status">Status:</label>
-                <select 
-                    name="assign_status" 
-                    id="assign_status"
-                    value={formData.assign_status}
-                    onChange={handleChange}
-                >
-                    <option value="">Select</option>
-                    <option value="Not Started">Not Started</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
                 </select>
 
                 <label htmlFor="assign_weight">Weight:</label>
