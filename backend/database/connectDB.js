@@ -3,6 +3,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+//Gets rid of the time zones when using timestamp 
+const { types } = pg;
+types.setTypeParser(1114, (value) => value);
+
 const requireEnvVar = [
     "PG_USER", "PG_HOST", "PG_DATABASE", "PG_PORT", "PG_PASSWORD"
 ];

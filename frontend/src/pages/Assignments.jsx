@@ -3,6 +3,7 @@ import AddAssignment from "../components/assignments/addAssignment";
 import EditAssignment from "../components/assignments/EditAssignment";
 import DeleteAssignment from "../components/assignments/DeleteAssignment";
 import apiFetch from "../utils/apiFetch.js";
+import { format, isPast, formatDistanceToNow } from "date-fns";
 
 function Assignments() {
 
@@ -51,13 +52,18 @@ function Assignments() {
             return "No due date";
         }
 
-        return new Date(date).toLocaleString(undefined, {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-        });
+        return format(date, "MMM d, yyyy h:mm a")
+    }
+
+    //Checks for the amount of time left before a due date
+    const checkTimeLeft = (date) => {
+        if (date == null) {
+            return null
+        } else if (isPast(date)) {
+            return "(Overdue)";
+        }  else {
+            return `(${formatDistanceToNow(date)} left)`
+        }
     }
 
     //Updates the status
@@ -101,9 +107,17 @@ function Assignments() {
                 <tbody className="border">
                     {assignments.map(assignment => (
                         <tr key={assignment.assign_id} className="border">
+
                             <td className="border">{assignment.course_code}</td>
                             <td className="border">{assignment.assign_name}</td>
-                            <td className="border">{displayDate(assignment.due_date)}</td>
+                            <td className="border">
+                                <div>
+                                    {displayDate(assignment.due_date)}
+                                </div>
+                                <div>
+                                    {checkTimeLeft(assignment.due_date)}
+                                </div>
+                            </td>
                             <td className="border">{assignment.assign_type}</td>
                             <td className="border">{assignment.assign_priority}</td>
                             <td className="border">
@@ -142,6 +156,7 @@ function Assignments() {
                                     Delete
                                 </button>
                             </td>
+                            
                         </tr>
                     ))}
                 </tbody>

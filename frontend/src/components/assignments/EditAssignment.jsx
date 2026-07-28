@@ -101,6 +101,7 @@ function EditAssignment({assignment, onClose}) {
                     <option value="Lab">Lab</option>
                     <option value="Project">Project</option>
                     <option value="Presentation">Presentation</option>
+                    <option value="Seminar">Seminar</option>
                     <option value="Other">Other</option>
                 </select>
 
