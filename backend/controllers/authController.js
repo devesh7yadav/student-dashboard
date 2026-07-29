@@ -14,7 +14,7 @@ const getUsers = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 //Creates a new user
 //RETURNING id, email, created_at; --- use later
@@ -36,7 +36,7 @@ const createUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 //Login
 const loginUser = async (req, res) => {
@@ -68,7 +68,7 @@ const loginUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 //Refreshes the token
 const refreshUserToken = async (req, res) => {
@@ -88,7 +88,7 @@ const refreshUserToken = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 //Logs a user out
 const logoutUser = async (req, res) => {
@@ -98,7 +98,7 @@ const logoutUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 export {
     getUsers,

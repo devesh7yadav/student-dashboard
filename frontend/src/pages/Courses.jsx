@@ -39,7 +39,7 @@ function Courses() {
                 <tr>
                     <th className="border">Course Code</th>
                     <th className="border">Course Name</th>
-                    <th>---</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -63,6 +63,11 @@ function Courses() {
                                 setCourseInfo(course);
                             }}>
                                 Delete
+                            </button>
+                        </td>
+                        <td>
+                            <button>
+                                View Grades
                             </button>
                         </td>
                     </tr>

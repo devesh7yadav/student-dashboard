@@ -22,23 +22,6 @@ const getAllAssignments = async (req, res) => {
     }
 }
 
-//Returns all assignments in a course
-const getCourseAssignments = async (req, res) => {
-    try {
-        const course_id = req.params.id;
-
-        const {rows} = await query(`
-            SELECT * FROM assignments
-            WHERE course_id = $1
-            `,
-            [course_id]
-        );
-        res.json(rows);
-    } catch (error) {
-        return res.status(500).json({error : error.message});
-    }
-};
-
 //Creates a new assignment
 const createAssignment = async (req, res) => {
     try {
@@ -187,7 +170,6 @@ const completeAssignment = async (req, res) => {
 
 export {
     getAllAssignments,
-    getCourseAssignments,
     createAssignment,
     deleteAssignment,
     editAssignment,
