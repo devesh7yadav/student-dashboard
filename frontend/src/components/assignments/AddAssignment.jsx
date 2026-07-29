@@ -8,6 +8,7 @@ function AddAssignment({courses, setAssignments, onClose}) {
         course_id: "",
         assign_name: "",
         due_date: "",
+        completed_date: "",
         assign_type: "",
         assign_priority: "",
         assign_status: "",
@@ -160,7 +161,6 @@ function AddAssignment({courses, setAssignments, onClose}) {
                     <option value="">Select</option>
                     <option value="Not Started">Not Started</option>
                     <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
                 </select>
 
                 <label htmlFor="assign_weight">Weight:</label>

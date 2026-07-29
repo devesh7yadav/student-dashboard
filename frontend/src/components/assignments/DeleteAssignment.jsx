@@ -12,7 +12,6 @@ function DeleteAssignment({assignment, onClose}) {
             method: "DELETE",
         });
 
-
         const data = await response.json();
 
         //Check for errors

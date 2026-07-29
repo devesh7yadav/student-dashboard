@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AddAssignment from "../components/assignments/addAssignment";
 import EditAssignment from "../components/assignments/EditAssignment";
 import DeleteAssignment from "../components/assignments/DeleteAssignment";
+import CompletedAssignments from "../components/assignments/CompletedAssignments.jsx";
 import apiFetch from "../utils/apiFetch.js";
 import { format, isPast, formatDistanceToNow } from "date-fns";
 
@@ -25,14 +26,14 @@ function Assignments() {
         }
 
         getAssignments();
-    }, [])
+    }, []);
 
     async function getAssignments() {
         const response = await apiFetch("http://localhost:5002/assignments");
         const data = await response.json();
 
         setAssignments(data);
-    }
+    };
 
     //Displays the courses
     useEffect(() => {
@@ -53,7 +54,7 @@ function Assignments() {
         }
 
         return format(date, "MMM d, yyyy h:mm a")
-    }
+    };
 
     //Checks for the amount of time left before a due date
     const checkTimeLeft = (date) => {
@@ -64,10 +65,15 @@ function Assignments() {
         }  else {
             return `(${formatDistanceToNow(date)} left)`
         }
-    }
+    };
 
     //Updates the status
     async function updateStatus(assignment) {
+
+        //Gets the current time once the assingment is complete
+        if (assignment.assign_status === "Completed"){
+            assignment.completed_date = new Date();
+        }
         
         const response = await apiFetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
             method: "PUT",
@@ -85,7 +91,15 @@ function Assignments() {
         }
 
         await getAssignments();
-    }
+    };
+
+    //Seperates the current and completed assignments
+    const currentAssignments = assignments.filter(
+        assign => assign.assign_status !== "Completed"
+    );
+    const completedAssignments = assignments.filter(
+        assign => assign.assign_status === "Completed"
+    );
 
     return(
         <div>
@@ -100,12 +114,11 @@ function Assignments() {
                         <th className="border">Status</th>
                         <th className="border">Weight (%)</th>
                         <th className="border">Notes</th>
-                        <th className="border">---</th>
                     </tr>
                 </thead>
 
                 <tbody className="border">
-                    {assignments.map(assignment => (
+                    {currentAssignments.map(assignment => (
                         <tr key={assignment.assign_id} className="border">
 
                             <td className="border">{assignment.course_code}</td>
@@ -156,6 +169,16 @@ function Assignments() {
                                     Delete
                                 </button>
                             </td>
+                            <td>
+                                <button onClick={() => {
+                                    updateStatus({
+                                        ...assignment,
+                                        assign_status: "Completed",
+                                    });
+                                }}>
+                                    Complete
+                                </button>
+                            </td>
                             
                         </tr>
                     ))}
@@ -181,6 +204,9 @@ function Assignments() {
                     getAssignments();
                 }} />
             )}
+
+            <CompletedAssignments completedAssignments={completedAssignments} getAssignments={getAssignments} />
+
         </div>
     )
 }

@@ -12,7 +12,8 @@ function EditAssignment({assignment, onClose}) {
         assign_priority: assignment.assign_priority,
         assign_status: assignment.assign_status,
         assign_weight: assignment.assign_weight,
-        assign_notes: assignment.assign_notes
+        assign_notes: assignment.assign_notes,
+        completed_date: assignment.completed_date,
     });
     const [message, setMessage] = useState(null);
 
@@ -47,7 +48,8 @@ function EditAssignment({assignment, onClose}) {
                 assign_priority: formData.assign_priority,
                 assign_status: formData.assign_status,
                 assign_weight: formData.assign_weight,
-                assign_notes: formData.assign_notes
+                assign_notes: formData.assign_notes,
+                completed_date: formData.completed_date
             }),
         });
 
