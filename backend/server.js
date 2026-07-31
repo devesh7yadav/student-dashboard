@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import "./database/connectDB.js";
 import courseRoutes from "./routes/courseRoutes.js"
 import assignRoutes from "./routes/assignmentRoutes.js"
-import gradebookRoutes from "./routes/gradebookRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
 import cookieParser from "cookie-parser";
 
@@ -25,7 +24,6 @@ app.use(cookieParser());
 //Routes
 app.use("/courses", courseRoutes);
 app.use("/assignments", assignRoutes);
-app.use("/grades", gradebookRoutes);
 app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;

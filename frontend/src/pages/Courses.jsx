@@ -3,8 +3,11 @@ import AddCourse from "../components/courses/AddCourse";
 import EditCourse from "../components/courses/EditCourse";
 import DeleteCourse from "../components/courses/DeleteCourse";
 import apiFetch from "../utils/apiFetch.js";
+import { useNavigate } from "react-router-dom";
 
 function Courses() {
+
+    const navigate = useNavigate();
 
     //Hooks
     const [courses, setCourses] = useState([]);
@@ -15,6 +18,7 @@ function Courses() {
 
     //Displays the courses
     useEffect(() => {
+        //Copied the code to stop the lint from complaining
         async function getCourses() {
             const response = await apiFetch("http://localhost:5002/courses");
             const data = await response.json();
@@ -66,7 +70,7 @@ function Courses() {
                             </button>
                         </td>
                         <td>
-                            <button>
+                            <button onClick={() => navigate(`/courses/${course.course_id}/grades`)}>
                                 View Grades
                             </button>
                         </td>

@@ -18,6 +18,7 @@ function Assignments() {
 
     //Displays the assignments
     useEffect(() => {
+        //Copied the code to stop the lint from complaining
         async function getAssignments() {
             const response = await apiFetch("http://localhost:5002/assignments");
             const data = await response.json();

@@ -13,6 +13,7 @@ function AddAssignment({courses, setAssignments, onClose}) {
         assign_priority: "",
         assign_status: "",
         assign_weight: "",
+        assign_grade: "",
         assign_notes: ""
     });
     const [message, setMessage] = useState(null);
