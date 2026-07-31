@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import apiFetch from "../utils/apiFetch.js";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import DeleteAssignment from "../components/assignments/DeleteAssignment.jsx";
+import AddGradebookItem from "../components/AddGradebookItem.jsx";
 
 //Copied code inside of useEffect since the lint complains if I don't
 
@@ -21,11 +23,24 @@ function Gradebook() {
     const [currentInfo, setCurrentInfo] = useState({
         average: "",
         total_weight: ""
-    })
+    });
+    const [showAdd, setShowAdd] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    const [showUpdate, setShowUpdate] = useState(true);
+    const [assignmentInfo, setAssignmentInfo] = useState(null);
+    const [message, setMessage] = useState(null);
 
     //Updates the textboxes
     function handleChange(e, assignment, field) {
         const value = e.target.value;
+
+        if (value < 0) {
+            setMessage("Grade and weight must be positive");
+            setShowUpdate(false);
+        } else {
+            setMessage(null);
+            setShowUpdate(true);
+        }
 
         setAssignments(prev => {
             const updatedAssignments = [];
@@ -56,7 +71,6 @@ function Gradebook() {
 
         displayGrades();
     }, [course_id]);
-
     async function displayGrades() {
         const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades`);
         const data = await response.json();
@@ -96,6 +110,9 @@ function Gradebook() {
 
         getAverage();
         displayGrades();
+
+        setMessage("Grades Updated!");
+        setTimeout(() => setMessage(null), 5000);
     };
 
     //Gets the average and weight
@@ -113,7 +130,6 @@ function Gradebook() {
 
         getAverage();
     }, [course_id]);
-
     async function getAverage() {
         const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades/average`);
 
@@ -123,7 +139,7 @@ function Gradebook() {
 
         const data = await response.json();
         setCurrentInfo(data);
-    }
+    };
 
     //Formats the date
     const displayDate = (date) => {
@@ -172,18 +188,48 @@ function Gradebook() {
                                     onChange={(e) => handleChange(e, assignment, "assign_weight")}
                                 />
                             </td>
+                            <td>
+                                <button onClick={() => {
+                                    setShowDelete(true);
+                                    setAssignmentInfo(assignment)
+                                }}>
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
+            <button className="border" onClick={() => setShowAdd(true)}>Add Item</button>
+
             <button onClick={() => navigate("/courses")}>
                 Back
             </button>
 
-            <button onClick={() => handleUpdate()}>
-                Update
-            </button>
+            {showUpdate && (
+                <button onClick={() => handleUpdate()}>
+                    Update
+                </button>
+            )}
+
+            {showAdd && (
+                <AddGradebookItem course_id={course_id} setAssignments={setAssignments} onClose={() => {
+                    setShowAdd(false); 
+                    getAverage();
+                    displayGrades();
+                }} />
+            )}
+
+            {showDelete && (
+                <DeleteAssignment assignment={assignmentInfo} onClose={() => {
+                    setShowDelete(false); 
+                    getAverage();
+                    displayGrades();
+                }} />
+            )}
+            
+            <p>{message}</p>
         </div>
     )
 }

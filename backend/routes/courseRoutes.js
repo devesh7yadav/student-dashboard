@@ -1,6 +1,6 @@
 import express from "express";
 import { getAllCourses, createCourse, deleteCourse, editCourse } from "../controllers/courseController.js"
-import { getCourseAssignments, getAverage, updateGrades, getCourseInfo } from "../controllers/gradebookController.js"; 
+import { getCourseAssignments, getAverage, createItem, updateGrades, getCourseInfo } from "../controllers/gradebookController.js"; 
 import { authenticateToken } from "../middleware/authorization.js";
 
 const router = express.Router();
@@ -16,5 +16,6 @@ router.get("/:id/grades/info", authenticateToken, getCourseInfo);
 router.get("/:id/grades/average", authenticateToken, getAverage);
 router.get("/:id/grades", authenticateToken, getCourseAssignments);
 router.put("/:id/grades", authenticateToken, updateGrades);
+router.post("/:id/grades/create", authenticateToken, createItem);
 
 export default router;

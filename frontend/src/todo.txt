@@ -1,4 +1,4 @@
-- Add a gradebook
 - Add grade calculators
 - Add filters and sort by to the assignments table
 - Style the app
+- Add a 404 page for when a user tries to look at another users gradebook

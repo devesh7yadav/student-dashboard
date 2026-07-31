@@ -28,6 +28,7 @@ CREATE TABLE assignments (
     assign_weight DECIMAL(5,2),
     assign_grade DECIMAL(5,2),
     assign_notes TEXT,
+    gradebook_only BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (course_id)
     REFERENCES courses(course_id)
     ON DELETE CASCADE

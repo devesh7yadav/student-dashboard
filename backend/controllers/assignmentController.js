@@ -13,6 +13,7 @@ const getAllAssignments = async (req, res) => {
             JOIN courses
             ON assignments.course_id = courses.course_id
             WHERE user_id = $1
+            AND assignments.gradebook_only = FALSE
             `,
             [user_id]
         );
@@ -20,7 +21,7 @@ const getAllAssignments = async (req, res) => {
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
-}
+};
 
 //Creates a new assignment
 const createAssignment = async (req, res) => {
