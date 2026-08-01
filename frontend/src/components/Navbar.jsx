@@ -31,6 +31,7 @@ function Navbar() {
                 <Link to="/">Home</Link>
                 <Link className="px-10" to="/courses">Courses & Grades</Link>
                 <Link to="/assignments">Assignments</Link>
+                <Link className="px-10">Calculators</Link>
             </div>
 
             <div className="px-300">

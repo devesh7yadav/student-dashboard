@@ -43,6 +43,7 @@ function Courses() {
                 <tr>
                     <th className="border">Course Code</th>
                     <th className="border">Course Name</th>
+                    <th className="border">Grade</th>
                     <th></th>
                 </tr>
             </thead>
@@ -52,6 +53,7 @@ function Courses() {
                     <tr key={course.course_id} className="border">
                         <td className="border">{course.course_code}</td>
                         <td className="border">{course.course_name}</td>
+                        <td className="border">{course.course_grade}%</td>
                         <td>
                             <button onClick={() => {
                                 setShowEdit(true);

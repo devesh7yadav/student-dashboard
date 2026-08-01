@@ -64,6 +64,15 @@ const getAverage = async (req, res) => {
             average = ((weighted_grade / total_weight) * 100).toFixed(2);
         }
 
+        //Updates to the course table
+        await query(`
+            UPDATE courses
+            SET course_grade = $1
+            WHERE course_id = $2
+            `,
+            [average, course_id]
+        );
+
         res.json({average, total_weight});
     } catch (error) {
         return res.status(500).json({error : error.message});

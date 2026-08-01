@@ -11,6 +11,7 @@ CREATE TABLE courses (
     user_id INT NOT NULL,
     course_code VARCHAR(50) NOT NULL,
     course_name VARCHAR(255) NOT NULL,
+    course_grade DECIMAL(5,2),
     FOREIGN KEY (user_id)
     REFERENCES users(id)
     ON DELETE CASCADE
