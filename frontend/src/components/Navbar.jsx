@@ -34,6 +34,12 @@ function Navbar() {
                 <Link className="px-10">Calculators</Link>
             </div>
 
+            <div>
+                <Link to="/calculator/exam-grade"> Exam Calc</Link>
+                <Link className="px-10" to="/calculator/grade-predictor"> Grade Predictor Calc</Link>
+                <Link to="/calculator/average"> Average</Link>
+            </div>
+
             <div className="px-300">
                 <button onClick={handleLogout}>Logout</button>
                 <p>{message}</p>

@@ -21,14 +21,12 @@ const getAverage = async (req, res) => {
             total_weight += weight;
         });
 
-        let average;
+        let average = 0;
 
         //Checks for an empty course
-        if (total_weight === 0){
-            average = 0
-        } else {
+        if (total_weight !== 0){
             average = ((weighted_grade / total_weight) * 100).toFixed(2);
-        }
+        } 
 
         res.status(200).json({average, total_weight});
     } catch (error) {
@@ -58,7 +56,7 @@ const getGradePrediction = async (req, res) => {
     try {
         const {current_grade, exam_grade, exam_weight} = req.body;
 
-        if (current_grade < 0 || exam_weight < 0 || exam_grade < 0) {
+        if (current_grade < 0 || exam_grade < 0 || exam_weight < 0) {
             return res.status(400).json({error: "Values must be positive"});
         }
 

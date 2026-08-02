@@ -63,7 +63,7 @@ function AddCourse ({setCourses, onClose}) {
             course_code: "",
             course_name: "",
         })
-    }
+    };
 
     return (
         <div>

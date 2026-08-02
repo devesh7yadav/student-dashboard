@@ -4,8 +4,8 @@ import { authenticateToken } from "../middleware/authorization.js";
 
 const router = express.Router();
 
-router.get("/average", authenticateToken, getAverage);
-router.get("/exam-grade", authenticateToken, getExamGrade);
-router.get("/grade-prediction", authenticateToken, getGradePrediction);
+router.post("/average", authenticateToken, getAverage);
+router.post("/exam-grade", authenticateToken, getExamGrade);
+router.post("/grade-predictor", authenticateToken, getGradePrediction);
 
 export default router;
