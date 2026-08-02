@@ -48,7 +48,7 @@ const getAverage = async (req, res) => {
             const weight = Number(assignment.assign_weight);
 
             if (grade < 0 || weight < 0){
-                res.status(400).json({error: "Grade and weight can't be negative"})
+                return res.status(400).json({error: "Grade and weight can't be negative"})
             }
 
             weighted_grade += grade * (weight / 100);
@@ -73,7 +73,7 @@ const getAverage = async (req, res) => {
             [average, course_id]
         );
 
-        res.json({average, total_weight});
+        res.status(200).json({average, total_weight});
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
