@@ -1,0 +1,5 @@
+#F1F2EB - White - Background Colour
+#22223B - Indigo
+#679436 - Green
+#6F8695 - Slate Grey
+#74A2BE - Dusk Blue - Add button

@@ -4,6 +4,7 @@ import EditCourse from "../components/courses/EditCourse";
 import DeleteCourse from "../components/courses/DeleteCourse";
 import apiFetch from "../utils/apiFetch.js";
 import { useNavigate } from "react-router-dom";
+import styles from "../Styles.js";
 
 function Courses() {
 
@@ -37,24 +38,28 @@ function Courses() {
     }
 
     return(
-      <div>
-        <table className="border">
-            <thead className="border">
+      <div className={styles.alignTable}>
+        <div className="">
+        <table className="">
+            <thead>
                 <tr>
-                    <th className="border">Course Code</th>
-                    <th className="border">Course Name</th>
-                    <th className="border">Grade</th>
-                    <th></th>
+                    <th className={styles.tableHeader}>Course Code</th>
+                    <th className={styles.tableHeader}>Course Name</th>
+                    <th className={styles.tableHeader}>Grade</th>
                 </tr>
             </thead>
 
-            <tbody className="border">
+            <tbody>
                 {courses.map(course => (
-                    <tr key={course.course_id} className="border">
-                        <td className="border">{course.course_code}</td>
-                        <td className="border">{course.course_name}</td>
-                        <td className="border">{course.course_grade}%</td>
+                    <tr key={course.course_id}>
+                        <td className={styles.tableBody}>{course.course_code}</td>
+                        <td className={styles.tableBody}>{course.course_name}</td>
+                        <td className={styles.tableBody}>{course.course_grade}%</td>
                         <td>
+                            <button className="grid grid-cols-2" onClick={() => navigate(`/courses/${course.course_id}/grades`)}>
+                                View Grades
+                            </button>
+
                             <button onClick={() => {
                                 setShowEdit(true);
                                 setCourseInfo(course);
@@ -62,8 +67,7 @@ function Courses() {
                             >
                                 Edit
                             </button>
-                        </td>
-                        <td>
+
                             <button onClick={() => {
                                 setShowDelete(true);
                                 setCourseInfo(course);
@@ -71,17 +75,13 @@ function Courses() {
                                 Delete
                             </button>
                         </td>
-                        <td>
-                            <button onClick={() => navigate(`/courses/${course.course_id}/grades`)}>
-                                View Grades
-                            </button>
-                        </td>
                     </tr>
                 ))}
             </tbody>
         </table>
+        </div>
 
-        <button className="border" onClick={() => setShowForm(true)}>Add Course</button>
+        <button className={styles.addButton} onClick={() => setShowForm(true)}>Add Course</button>
         {showForm && (
             <AddCourse setCourses={setCourses} onClose={() => setShowForm(false)}/>
         )}
@@ -100,8 +100,7 @@ function Courses() {
             }}/>
         )}
       </div>  
-      
     )
-}
+};
 
 export default Courses;

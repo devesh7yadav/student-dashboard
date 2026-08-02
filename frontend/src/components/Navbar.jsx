@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import apiFetch from "../utils/apiFetch.js";
 
 function Navbar() {
 
-    const [message, setMessage] = useState(null);
-
+    //Logs the user out
     const handleLogout = async (e) => {
         e.preventDefault();
 
@@ -13,11 +11,10 @@ function Navbar() {
             method: "DELETE"
         });
 
-        const data = await response.json();
+        await response.json();
 
         //Check for errors
         if(!response.ok) {
-            setMessage(data.error);
             return;
         }
 
@@ -26,26 +23,28 @@ function Navbar() {
     };
 
     return (
-        <div>
-            <div>
+        <div className="flex h-screen shadow-xl">
+            <div className="flex flex-col min-w-40 gap-y-10">
+
                 <Link to="/">Home</Link>
-                <Link className="px-10" to="/courses">Courses & Grades</Link>
+                <Link to="/courses">Courses & Grades</Link>
                 <Link to="/assignments">Assignments</Link>
-                <Link className="px-10">Calculators</Link>
-            </div>
 
-            <div>
-                <Link to="/calculator/exam-grade"> Exam Calc</Link>
-                <Link className="px-10" to="/calculator/grade-predictor"> Grade Predictor Calc</Link>
-                <Link to="/calculator/average"> Average</Link>
-            </div>
+                <div className="group">
+                    <button> Calculators </button>
 
-            <div className="px-300">
-                <button onClick={handleLogout}>Logout</button>
-                <p>{message}</p>
+                    <div className="hidden group-hover:grid">
+                        <Link to="/calculator/exam-grade"> Exam Calc</Link>
+                        <Link to="/calculator/grade-predictor"> Grade Predictor Calc</Link>
+                        <Link to="/calculator/average"> Average</Link>
+                    </div>
+                </div>
+
+                <button className="absolute bottom-10 text-left" onClick={handleLogout}>Logout</button>
+
             </div>
         </div>
     )
-}
+};
 
 export default Navbar;

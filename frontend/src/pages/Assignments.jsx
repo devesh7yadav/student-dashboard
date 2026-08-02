@@ -5,6 +5,7 @@ import DeleteAssignment from "../components/assignments/DeleteAssignment";
 import CompletedAssignments from "../components/assignments/CompletedAssignments.jsx";
 import apiFetch from "../utils/apiFetch.js";
 import { format, isPast, formatDistanceToNow } from "date-fns";
+import styles from "../Styles.js";
 
 function Assignments() {
 
@@ -186,7 +187,7 @@ function Assignments() {
                 </tbody>
             </table>
 
-            <button className="border" onClick={() => setShowForm(true)}>Add Assignment</button>
+            <button className={styles.addButton} onClick={() => setShowForm(true)}>Add Assignment</button>
             {showForm && (
                 <AddAssignment courses={courses} setAssignments={setAssignments} onClose={() => {
                     setShowForm(false); 

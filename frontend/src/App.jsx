@@ -16,7 +16,7 @@ function App() {
   const location = useLocation();
   
   return (
-    <div>
+    <div className="flex h-screen">
 
       {location.pathname !== "/login" && location.pathname !== "/signup" && (
         <Navbar />

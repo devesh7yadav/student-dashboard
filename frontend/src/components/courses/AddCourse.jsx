@@ -1,5 +1,6 @@
 import { useState } from "react";
 import apiFetch from "../../utils/apiFetch.js";
+import styles from "../../Styles.js";
 
 function AddCourse ({setCourses, onClose}) {
 
