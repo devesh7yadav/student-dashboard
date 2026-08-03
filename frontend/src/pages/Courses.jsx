@@ -5,6 +5,7 @@ import DeleteCourse from "../components/courses/DeleteCourse";
 import apiFetch from "../utils/apiFetch.js";
 import { useNavigate } from "react-router-dom";
 import styles from "../Styles.js";
+import { Trash, SquarePen } from 'lucide-react';
 
 function Courses() {
 
@@ -39,49 +40,62 @@ function Courses() {
 
     return(
       <div className={styles.alignTable}>
-        <div className="">
-        <table className="">
-            <thead>
-                <tr>
-                    <th className={styles.tableHeader}>Course Code</th>
-                    <th className={styles.tableHeader}>Course Name</th>
-                    <th className={styles.tableHeader}>Grade</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                {courses.map(course => (
-                    <tr key={course.course_id}>
-                        <td className={styles.tableBody}>{course.course_code}</td>
-                        <td className={styles.tableBody}>{course.course_name}</td>
-                        <td className={styles.tableBody}>{course.course_grade}%</td>
-                        <td>
-                            <button className="grid grid-cols-2" onClick={() => navigate(`/courses/${course.course_id}/grades`)}>
-                                View Grades
-                            </button>
+        <div className="grid grid-cols-3 mb-4">
+            <div/>
 
-                            <button onClick={() => {
-                                setShowEdit(true);
-                                setCourseInfo(course);
-                            }}
-                            >
-                                Edit
-                            </button>
+            <h1 className={styles.title}>Your Courses</h1>
 
-                            <button onClick={() => {
-                                setShowDelete(true);
-                                setCourseInfo(course);
-                            }}>
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+            <div className={styles.alignAddButton}>
+                <button className={styles.addButton} onClick={() => setShowForm(true)}> + Add Course</button>
+            </div>
         </div>
 
-        <button className={styles.addButton} onClick={() => setShowForm(true)}>Add Course</button>
+        <div className={styles.tableBorder}>
+            <table>
+                <thead>
+                    <tr>
+                        <th className={styles.tableHeader}>Course Code</th>
+                        <th className={styles.tableHeader}>Course Name</th>
+                        <th className={styles.tableHeader}>Grade</th>
+                        <th className={styles.tableHeader}></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {courses.map(course => (
+                        <tr key={course.course_id} className={styles.tableRow}>
+                            <td className={styles.tableBody}>{course.course_code}</td>
+                            <td className={styles.tableBody}>{course.course_name}</td>
+                            <td className={styles.tableBody}>{course.course_grade}%</td>
+                            <td className={styles.tableBody}>
+                                <div className="grid grid-cols-[3fr_2fr_1fr] py-6">
+                                    <button className="cursor-pointer hover:text-[#F1F2EB] text-xs md:text-base border-2 border-[#74A2BE] rounded-md p-2 shadow-sm" onClick={() => navigate(`/courses/${course.course_id}/grades`)}>
+                                        View Grades
+                                    </button>
+                                    
+                                    <button className="place-items-center" onClick={() => {
+                                        setShowEdit(true);
+                                        setCourseInfo(course);
+                                    }}
+                                    >
+                                        <SquarePen className={styles.editButton}/>
+                                    </button>
+
+                                    <button className= "place-items-center" onClick={() => {
+                                        setShowDelete(true);
+                                        setCourseInfo(course);
+                                    }}>
+                                        <Trash className={styles.deleteButton}/>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+
         {showForm && (
             <AddCourse setCourses={setCourses} onClose={() => setShowForm(false)}/>
         )}

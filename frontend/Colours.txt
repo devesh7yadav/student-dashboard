@@ -1,5 +1,17 @@
-#F1F2EB - White - Background Colour
 #22223B - Indigo
-#679436 - Green
-#6F8695 - Slate Grey
-#74A2BE - Dusk Blue - Add button
+
+Backgrounds ---
+#F1F2EB - White - Main Background
+#ADBAC2 - Pale Slate - Header
+
+Buttons ---
+#74A2BE - Dusk Blue - Add 
+
+Hover ---
+#679436 - Green - Edit
+#D01117 - Red - Delete
+#a4c5db - Slate Grey - Table
+#F1F2EB - White - Buttons
+
+Border ---
+#74A2BE - Dusk Blue - Tables

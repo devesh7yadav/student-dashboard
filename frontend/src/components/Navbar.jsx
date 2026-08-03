@@ -23,26 +23,22 @@ function Navbar() {
     };
 
     return (
-        <div className="flex h-screen shadow-xl">
-            <div className="flex flex-col min-w-40 gap-y-10">
+        <div className="flex flex-col text-sm md:text-base min-w-24 md:min-w-48 text-center gap-y-6 h-screen shadow-2xl">
+            <Link to="/">Home</Link>
+            <Link to="/courses">Courses & Grades</Link>
+            <Link to="/assignments">Assignments</Link>
 
-                <Link to="/">Home</Link>
-                <Link to="/courses">Courses & Grades</Link>
-                <Link to="/assignments">Assignments</Link>
+            <div className="group text-center">
+                <button> Calculators </button>
 
-                <div className="group">
-                    <button> Calculators </button>
-
-                    <div className="hidden group-hover:grid">
-                        <Link to="/calculator/exam-grade"> Exam Calc</Link>
-                        <Link to="/calculator/grade-predictor"> Grade Predictor Calc</Link>
-                        <Link to="/calculator/average"> Average</Link>
-                    </div>
+                <div className="hidden group-hover:grid place-items-center gap-y-3">
+                    <Link to="/calculator/exam-grade"> Exam Calc</Link>
+                    <Link to="/calculator/grade-predictor"> Grade Predictor Calc</Link>
+                    <Link to="/calculator/average"> Average</Link>
                 </div>
-
-                <button className="absolute bottom-10 text-left" onClick={handleLogout}>Logout</button>
-
             </div>
+
+            <button className="absolute bottom-10 text-left" onClick={handleLogout}>Logout</button>
         </div>
     )
 };
