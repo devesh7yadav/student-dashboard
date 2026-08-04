@@ -6,6 +6,7 @@ import apiFetch from "../utils/apiFetch.js";
 import { useNavigate } from "react-router-dom";
 import styles from "../Styles.js";
 import { Trash, SquarePen } from 'lucide-react';
+import Modal from "../components/Modal.jsx";
 
 function Courses() {
 
@@ -41,7 +42,7 @@ function Courses() {
     return(
       <div className={styles.alignTable}>
 
-        <div className="grid grid-cols-3 mb-4">
+        <div className={styles.alignHeader}>
             <div/>
 
             <h1 className={styles.title}>Your Courses</h1>
@@ -97,21 +98,27 @@ function Courses() {
         </div>
 
         {showForm && (
-            <AddCourse setCourses={setCourses} onClose={() => setShowForm(false)}/>
+            <Modal type="add">
+                <AddCourse setCourses={setCourses} onClose={() => setShowForm(false)} />
+            </Modal>
         )}
 
         {showEdit && (
-            <EditCourse course={courseInfo} onClose={() => {
-                setShowEdit(false);
-                displayCourses();
-            }}/>
+            <Modal type="edit">
+                <EditCourse course={courseInfo} onClose={() => {
+                    setShowEdit(false);
+                    displayCourses();
+                }}/>
+            </Modal>
         )}
 
         {showDelete && (
-            <DeleteCourse course={courseInfo} onClose={() => {
-                setShowDelete(false);
-                displayCourses();
-            }}/>
+            <Modal type="delete">
+                <DeleteCourse course={courseInfo} onClose={() => {
+                    setShowDelete(false);
+                    displayCourses();
+                }}/>
+            </Modal>
         )}
       </div>  
     )

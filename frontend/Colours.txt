@@ -1,11 +1,13 @@
-#22223B - Indigo
-
 Backgrounds ---
 #F1F2EB - White - Main Background
 #ADBAC2 - Pale Slate - Header
 
 Buttons ---
 #74A2BE - Dusk Blue - Add 
+#679436 - Green - Update/Submit
+#ADBAC2 - Pale Slate - Back/Exit
+#B3BFB8 - Ash Grey - Clear/No
+#D01117 - Red - Delete/Yes
 
 Hover ---
 #679436 - Green - Edit
@@ -14,4 +16,15 @@ Hover ---
 #F1F2EB - White - Buttons
 
 Border ---
-#74A2BE - Dusk Blue - Tables
+#74A2BE - Dusk Blue - Tables/Back 
+
+Modal Borders
+#D01117 - Red - Delete
+#679436 - Green - Add
+#74A2BE - Dusk Blue - Edit 
+
+Scrollbar
+#22223B - Indigo - Scrollbar
+
+Text
+#ADBAC2 - Pale Slate - Gradebook

@@ -70,30 +70,40 @@ function AddCourse ({setCourses, onClose}) {
         <div>
             <form onSubmit={handleSubmit}>
 
-                <label htmlFor="course_code">Course Code: </label>
-                <input 
-                    type="text" 
-                    id="course_code"
-                    name="course_code"
-                    value={formData.course_code}
-                    onChange={handleChange}
-                />
+                <div className="grid">
+                    <label className={styles.label} htmlFor="course_code">Course Code: </label>
+                    <input 
+                        className={styles.inputBox}
+                        type="text" 
+                        id="course_code"
+                        name="course_code"
+                        value={formData.course_code}
+                        onChange={handleChange}
+                    />
+                </div>
+                
+                <div className="grid mt-4">
+                    <label className={styles.label} htmlFor="course_name">Course Name: </label>
+                    <input 
+                        className={styles.inputBox}
+                        type="text" 
+                        id="course_name"
+                        name="course_name"
+                        value={formData.course_name}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                <label htmlFor="course_name">Course Name: </label>
-                <input 
-                    type="text" 
-                    id="course_name"
-                    name="course_name"
-                    value={formData.course_name}
-                    onChange={handleChange}
-                />
-
-                <button type="submit">Submit</button>
-                <button type="reset" onClick={handleReset}>Clear</button>
-                <button type="button" onClick={onClose}>Exit</button>
+                <div className="flex pt-8"> 
+                    <button className={styles.exitButton} type="button" onClick={onClose}>Exit</button>  
+                    <div className="ml-auto flex gap-1 md:gap-3">
+                        <button className={styles.clearButton} type="reset" onClick={handleReset}>Clear</button>       
+                        <button className={styles.submitButton} type="submit">Submit</button>
+                    </div>
+                </div>
 
             </form>
-            <p>{message}</p>
+            <p className={styles.message}>{message}</p>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import apiFetch from "../../utils/apiFetch.js";
+import styles from "../../Styles.js";
 
 function EditCourse({course, onClose}) {
 
@@ -55,28 +56,36 @@ function EditCourse({course, onClose}) {
     return(
         <div>
             <form onSubmit={handleEdit}>
-                <label htmlFor="course_code">Course Code: </label>
-                <input 
-                    type="text" 
-                    id="course_code"
-                    name="course_code"
-                    value={formData.course_code}
-                    onChange={handleChange}
-                />
+                <div className="grid">
+                    <label className={styles.label} htmlFor="course_code">Course Code: </label>
+                    <input 
+                        className={styles.inputBox}
+                        type="text" 
+                        id="course_code"
+                        name="course_code"
+                        value={formData.course_code}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                <label htmlFor="course_name">Course Name: </label>
-                <input 
-                    type="text" 
-                    id="course_name"
-                    name="course_name"
-                    value={formData.course_name}
-                    onChange={handleChange}
-                />
+                <div className="grid mt-4">
+                    <label className={styles.label} htmlFor="course_name">Course Name: </label>
+                    <input 
+                        className={styles.inputBox}
+                        type="text" 
+                        id="course_name"
+                        name="course_name"
+                        value={formData.course_name}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                <button type="submit">Submit</button>
-                <button type="button" onClick={onClose}>Exit</button>
+                <div className="grid grid-cols-2 pt-8">
+                    <button className={styles.exitButton} type="button" onClick={onClose}>Exit</button>
+                    <button className={styles.submitButton} type="submit">Submit</button>
+                </div>
             </form>
-            <p>{message}</p>
+            <p className={styles.message}>{message}</p>
         </div>
     )
 }

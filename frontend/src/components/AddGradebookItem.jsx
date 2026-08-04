@@ -1,5 +1,6 @@
 import { useState } from "react";
 import apiFetch from "../utils/apiFetch.js";
+import styles from "../Styles.js";
 
 function AddGradebookItem({course_id, setAssignments, onClose}) {
     //Hooks
@@ -59,8 +60,9 @@ function AddGradebookItem({course_id, setAssignments, onClose}) {
     return(
         <div>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name: </label>
+                <label className={styles.label} htmlFor="name">Name: </label>
                 <input 
+                    className={styles.inputBox}
                     type="text" 
                     id="assign_name"
                     name="assign_name"
@@ -68,11 +70,16 @@ function AddGradebookItem({course_id, setAssignments, onClose}) {
                     onChange={handleChange}
                 />
 
-                <button type="submit">Submit</button>
-                <button type="reset" onClick={handleReset}>Clear</button>
-                <button type="button" onClick={onClose}>Exit</button>
+                <div className="flex pt-8">
+                    <button className={styles.exitButton} type="button" onClick={onClose}>Exit</button>
+
+                    <div className="ml-auto flex gap-1 md:gap-3">
+                        <button className={styles.clearButton} type="reset" onClick={handleReset}>Clear</button>
+                        <button className={styles.submitButton} type="submit">Submit</button>
+                    </div>
+                </div>
             </form>
-            <p>{message}</p>
+            <p className={styles.message}>{message}</p>
         </div>
     )
 };

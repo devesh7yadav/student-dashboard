@@ -1,9 +1,7 @@
-import { useState } from "react";
 import apiFetch from "../../utils/apiFetch.js";
+import styles from "../../Styles.js";
 
 function DeleteAssignment({assignment, onClose}) {
-
-    const [message, setMessage] = useState(null);
 
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -12,11 +10,10 @@ function DeleteAssignment({assignment, onClose}) {
             method: "DELETE",
         });
 
-        const data = await response.json();
+        await response.json();
 
         //Check for errors
         if(!response.ok) {
-            setMessage(data.error);
             return;
         }
 
@@ -26,10 +23,12 @@ function DeleteAssignment({assignment, onClose}) {
     return (
         <div>
             <form onSubmit={handleDelete}>
-                <p>Are you sure you want to delete {assignment.assign_name}?</p>
-                <button type="button" onClick={onClose}>No</button>
-                <button type="submit">Yes</button>
-                <p>{message}</p>
+                <p className={styles.deleteText}>Are you sure you want to delete {assignment.assign_name}?</p>
+
+                <div className="grid grid-cols-2 pt-8">
+                    <button className={styles.no} type="button" onClick={onClose}>No</button>
+                    <button className={styles.yes} type="submit">Yes</button>
+                </div>
             </form>
         </div>
     )
