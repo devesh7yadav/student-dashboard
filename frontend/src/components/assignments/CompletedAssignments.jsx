@@ -2,6 +2,9 @@ import { useState } from "react";
 import { format } from "date-fns";
 import DeleteAssignment from "./DeleteAssignment";
 import apiFetch from "../../utils/apiFetch";
+import styles from "../../Styles";
+import { Trash } from 'lucide-react';
+import Modal from "../Modal";
 
 function CompletedAssignments({completedAssignments, getAssignments}) {
 
@@ -35,9 +38,9 @@ function CompletedAssignments({completedAssignments, getAssignments}) {
     };
 
     return (
-        <div>
+        <div className="grid place-items-center p-10">
             {!showCompleted && (
-                <button onClick={() => {
+                <button className={styles.viewAssignButton} onClick={() => {
                     setShowCompleted(true);
                 }}>
                     View Completed
@@ -46,61 +49,68 @@ function CompletedAssignments({completedAssignments, getAssignments}) {
 
             {showCompleted && (
                 <div> 
-                    <button onClick={() => {
-                        setShowCompleted(false);
-                    }}>
-                        Hide Completed
-                    </button>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th className="border">Course</th>
-                                <th className="border">Assignment</th>
-                                <th className="border">Completion Date</th>
-                                <th className="border">Type</th>
-                                <th className="border">Notes</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            {completedAssignments.map(assignment => (
-                                <tr key={assignment.assign_id} className="border">
-
-                                    <td className="border">{assignment.course_code}</td>
-                                    <td className="border">{assignment.assign_name}</td>
-                                    <td className="border">{format(assignment.completed_date, "MMM d, yyyy h:mm a")}</td>
-                                    <td className="border">{assignment.assign_type}</td>
-                                    <td className="border">{assignment.assign_notes}</td>
-                                    <td>
-                                        <button onClick={() =>{ 
-                                            setShowDelete(true);
-                                            setAssignmentInfo(assignment);
-                                        }}>
-                                            Delete
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => {handleRestore(assignment)}}>
-                                            Restore
-                                        </button>
-                                    </td>
+                    <div className="grid place-items-center mb-4">
+                        <button className={styles.viewAssignButton} onClick={() => {
+                            setShowCompleted(false);
+                        }}>
+                            Hide Completed
+                        </button>
+                    </div>
+                    
+                    <div className="overflow-x-auto rounded-lg border-[#679436] border-x-2 border-t-2 shadow-xl">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className={styles.assignTableHeader}>Course</th>
+                                    <th className={styles.assignTableHeader}>Assignment</th>
+                                    <th className={styles.assignTableHeader}>Completion Date</th>
+                                    <th className={styles.assignTableHeader}>Type</th>
+                                    <th className={styles.assignTableHeader}>Notes</th>
+                                    <th className={styles.assignTableHeader}></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            
+                            <tbody>
+                                {completedAssignments.map(assignment => (
+                                    <tr key={assignment.assign_id} className={styles.tableRow}>
+
+                                        <td className={styles.completedTableBody}>{assignment.course_code}</td>
+                                        <td className={styles.completedTableBody}>{assignment.assign_name}</td>
+                                        <td className={styles.completedTableBody}>{format(assignment.completed_date, "MMM d, yyyy h:mm a")}</td>
+                                        <td className={styles.completedTableBody}>{assignment.assign_type}</td>
+                                        <td className={styles.completedTableBody}>{assignment.assign_notes}</td>
+                                        <td className={styles.completedTableBody}>
+                                            <div className="grid grid-cols-2">
+                                                <button className="cursor-pointer hover:text-[#F1F2EB] text-xs md:text-base border-2 border-[#74A2BE] rounded-md p-2 shadow-sm" onClick={() => {handleRestore(assignment)}}>
+                                                    Restore
+                                                </button>
+
+                                                <button className="place-items-center" onClick={() =>{ 
+                                                    setShowDelete(true);
+                                                    setAssignmentInfo(assignment);
+                                                }}>
+                                                    <Trash className={styles.deleteButton}/>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
 
                     {showDelete && (
-                        <DeleteAssignment assignment={assignmentInfo} onClose={() => {
-                            setShowDelete(false);
-                            getAssignments();
-                        }}/>
+                        <Modal type="delete">
+                            <DeleteAssignment assignment={assignmentInfo} onClose={() => {
+                                setShowDelete(false);
+                                getAssignments();
+                            }}/>
+                        </Modal>
                     )}
-
                 </div>
             )}
         </div>
     )
-}
+};
 
 export default CompletedAssignments;

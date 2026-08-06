@@ -1,5 +1,6 @@
 import { useState } from "react";
 import apiFetch from "../../utils/apiFetch.js";
+import styles from "../../Styles.js";
 
 function EditAssignment({assignment, onClose}) {
 
@@ -69,81 +70,102 @@ function EditAssignment({assignment, onClose}) {
     return (
         <div>
             <form onSubmit={handleEdit}>
+                <div className="grid grid-cols-2">
+                    <div className="grid pr-2">
+                        <label className={styles.label}  htmlFor="assign_name">Name:</label>
+                        <input 
+                            className={styles.inputBox}
+                            type="text" 
+                            id="assign_name"
+                            name="assign_name"
+                            value={formData.assign_name}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <label htmlFor="assign_name">Name:</label>
-                <input 
-                    type="text" 
-                    id="assign_name"
-                    name="assign_name"
-                    value={formData.assign_name}
-                    onChange={handleChange}
-                />
+                    <div className="grid pl-2">
+                        <label className={styles.label}  htmlFor="assign_type">Type:</label>
+                        <select 
+                            className={styles.dropdown}
+                            name="assign_type" 
+                            id="assign_type"
+                            value={formData.assign_type}
+                            onChange={handleChange}
+                        >
+                            <option value="">Select</option>
+                            <option value="Assignment">Assignment</option>
+                            <option value="Quiz">Quiz</option>
+                            <option value="Test">Test</option>
+                            <option value="Exam">Exam</option>
+                            <option value="Midterm">Midterm</option>
+                            <option value="Lab">Lab</option>
+                            <option value="Project">Project</option>
+                            <option value="Presentation">Presentation</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
 
-                <label htmlFor="due_date">Due Date:</label>
-                <input 
-                    type="datetime-local" 
-                    id="due_date"
-                    name="due_date"
-                    value={formData.due_date}
-                    onChange={handleChange}
-                    required={false}
-                />
+                <div className="grid mt-4">
+                    <label className={styles.label}  htmlFor="due_date">Due Date:</label>
+                    <input 
+                        className={styles.inputBox}
+                        type="datetime-local" 
+                        id="due_date"
+                        name="due_date"
+                        value={formData.due_date}
+                        onChange={handleChange}
+                        required={false}
+                    />
+                </div>
 
-                <label htmlFor="assign_type">Type:</label>
-                <select 
-                    name="assign_type" 
-                    id="assign_type"
-                    value={formData.assign_type}
-                    onChange={handleChange}
-                >
-                    <option value="">Select</option>
-                    <option value="Assignment">Assignment</option>
-                    <option value="Quiz">Quiz</option>
-                    <option value="Test">Test</option>
-                    <option value="Exam">Exam</option>
-                    <option value="Midterm">Midterm</option>
-                    <option value="Lab">Lab</option>
-                    <option value="Project">Project</option>
-                    <option value="Presentation">Presentation</option>
-                    <option value="Seminar">Seminar</option>
-                    <option value="Other">Other</option>
-                </select>
+                <div className="grid mt-4">
+                    <label className={styles.label}  htmlFor="assign_priority">Priority:</label>
+                    <select 
+                        className={styles.dropdown}
+                        name="assign_priority" 
+                        id="assign_priority"
+                        value={formData.assign_priority}
+                        onChange={handleChange}
+                    >
+                        <option value="">Select</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
 
-                <label htmlFor="assign_priority">Priority:</label>
-                <select 
-                    name="assign_priority" 
-                    id="assign_priority"
-                    value={formData.assign_priority}
-                    onChange={handleChange}
-                >
-                    <option value="">Select</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
+                <div className="grid mt-4">
+                    <label className={styles.label}  htmlFor="assign_weight">Weight:</label>
+                    <input 
+                        className={styles.inputBox}
+                        type="number" 
+                        id="assign_weight"
+                        name="assign_weight"
+                        value={formData.assign_weight}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                <label htmlFor="assign_weight">Weight:</label>
-                <input 
-                    type="number" 
-                    id="assign_weight"
-                    name="assign_weight"
-                    value={formData.assign_weight}
-                    onChange={handleChange}
-                />
+                <div className="grid mt-4">
+                    <label className={styles.label}  htmlFor="assign_notes">Notes:</label>
+                    <input 
+                        className={styles.inputBox}
+                        type="text" 
+                        id="assign_notes"
+                        name="assign_notes"
+                        value={formData.assign_notes}
+                        onChange={handleChange}
+                    />
+                </div>
 
-                <label htmlFor="assign_notes">Notes:</label>
-                <input 
-                    type="text" 
-                    id="assign_notes"
-                    name="assign_notes"
-                    value={formData.assign_notes}
-                    onChange={handleChange}
-                />
-
-                <button type="submit">Submit</button>
-                <button type="button" onClick={onClose}>Exit</button>
+                <div className="grid grid-cols-2 pt-8">
+                    <button className={styles.exitButton} type="button" onClick={onClose}>Exit</button>
+                    <button className={styles.submitButton} type="submit">Submit</button>
+                </div>
             </form>
-            <p>{message}</p>
+            <p className={styles.message}>{message}</p>
         </div>
     )
 }

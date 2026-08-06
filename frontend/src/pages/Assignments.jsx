@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import AddAssignment from "../components/assignments/addAssignment";
+import AddAssignment from "../components/assignments/AddAssignment";
 import EditAssignment from "../components/assignments/EditAssignment";
 import DeleteAssignment from "../components/assignments/DeleteAssignment";
 import CompletedAssignments from "../components/assignments/CompletedAssignments.jsx";
 import apiFetch from "../utils/apiFetch.js";
 import { format, isPast, formatDistanceToNow } from "date-fns";
 import styles from "../Styles.js";
+import { Trash, SquarePen, CircleCheckBig  } from 'lucide-react';
+import Modal from "../components/Modal.jsx";
 
 function Assignments() {
 
@@ -104,113 +106,130 @@ function Assignments() {
     );
 
     return(
-        <div>
-            <table className="border">
-                <thead className="border">
-                    <tr>
-                        <th className="border">Course</th>
-                        <th className="border">Assignment</th>
-                        <th className="border">Due Date</th>
-                        <th className="border">Type</th>
-                        <th className="border">Priority</th>
-                        <th className="border">Status</th>
-                        <th className="border">Weight (%)</th>
-                        <th className="border">Notes</th>
-                    </tr>
-                </thead>
+        <div className={styles.alignTable}>
 
-                <tbody className="border">
-                    {currentAssignments.map(assignment => (
-                        <tr key={assignment.assign_id} className="border">
+            <div className={styles.alignHeader}>
+                <div />
 
-                            <td className="border">{assignment.course_code}</td>
-                            <td className="border">{assignment.assign_name}</td>
-                            <td className="border">
-                                <div>
-                                    {displayDate(assignment.due_date)}
-                                </div>
-                                <div>
-                                    {checkTimeLeft(assignment.due_date)}
-                                </div>
-                            </td>
-                            <td className="border">{assignment.assign_type}</td>
-                            <td className="border">{assignment.assign_priority}</td>
-                            <td className="border">
-                                <select 
-                                    name="assign_status" 
-                                    id="assign_status"
-                                    value={assignment.assign_status}
-                                    onChange={(e) => {
-                                        updateStatus({
-                                            ...assignment,
-                                            assign_status: e.target.value,
-                                        });
-                                    }}
-                                >
-                                    <option value=""></option>
-                                    <option value="Not Started">Not Started</option>
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                            </td>
-                            <td className="border">{assignment.assign_weight}</td>
-                            <td className="border">{assignment.assign_notes}</td>
-                            <td>
-                                <button onClick={() => {
-                                    setShowEdit(true);
-                                    setAssignmentInfo(assignment);
-                                }}>
-                                    Edit
-                                </button>
-                            </td>
-                            <td>
-                                <button onClick={() => {
-                                    setShowDelete(true);
-                                    setAssignmentInfo(assignment);
-                                }}>
-                                    Delete
-                                </button>
-                            </td>
-                            <td>
-                                <button onClick={() => {
-                                    updateStatus({
-                                        ...assignment,
-                                        assign_status: "Completed",
-                                    });
-                                }}>
-                                    Complete
-                                </button>
-                            </td>
-                            
+                <h1 className={styles.title}>Your Assignments</h1>
+
+                <div className={styles.alignAddButton}>
+                    <button className={styles.addButton} onClick={() => setShowForm(true)}> + Add Assignment </button>
+                </div>
+            </div>
+
+            <div className={styles.tableBorder}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className={styles.assignTableHeader}>Course</th>
+                            <th className={styles.assignTableHeader}>Assignment</th>
+                            <th className={styles.assignTableHeader}>Due Date</th>
+                            <th className={styles.assignTableHeader}>Type</th>
+                            <th className={styles.assignTableHeader}>Priority</th>
+                            <th className={styles.assignTableHeader}>Status</th>
+                            <th className={styles.assignTableHeader}>Weight (%)</th>
+                            <th className={styles.assignTableHeader}>Notes</th>
+                            <th className={styles.assignTableHeader}></th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
 
-            <button className={styles.addButton} onClick={() => setShowForm(true)}>Add Assignment</button>
+                    <tbody>
+                        {currentAssignments.map(assignment => (
+                            <tr key={assignment.assign_id} className={styles.tableRow}>
+                                <td className={styles.assignTableBody}>{assignment.course_code}</td>
+                                <td className={styles.assignTableBody}>{assignment.assign_name}</td>
+                                <td className={styles.assignTableBody}>
+                                    <div>
+                                        {displayDate(assignment.due_date)}
+                                    </div>
+                                    <div>
+                                        {checkTimeLeft(assignment.due_date)}
+                                    </div>
+                                </td>
+                                <td className={styles.assignTableBody}>{assignment.assign_type}</td>
+                                <td className={styles.assignTableBody}>{assignment.assign_priority}</td>
+                                <td className={styles.assignTableBody}>
+                                    <select 
+                                        className={styles.dropdown}
+                                        name="assign_status" 
+                                        id="assign_status"
+                                        value={assignment.assign_status}
+                                        onChange={(e) => {
+                                            updateStatus({
+                                                ...assignment,
+                                                assign_status: e.target.value,
+                                            });
+                                        }}
+                                    >
+                                        <option value=""></option>
+                                        <option value="Not Started">Not Started</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </td>
+                                <td className={styles.assignTableBody}>{assignment.assign_weight}</td>
+                                <td className="text-sm md:text-base text-center lg:px-2 border-[#74A2BE] border-b-2 max-w-20 truncate">{assignment.assign_notes}</td>
+                                <td className={styles.assignTableBody}>
+                                    <div className="grid grid-cols-3 gap-x-4">
+                                        <button className="place-items-center" onClick={() => {
+                                            setShowEdit(true);
+                                            setAssignmentInfo(assignment);
+                                        }}>
+                                            <SquarePen className={styles.editButton} />
+                                        </button>
+                                    
+                                        <button className="place-items-center" onClick={() => {
+                                            setShowDelete(true);
+                                            setAssignmentInfo(assignment);
+                                        }}>
+                                            <Trash className={styles.deleteButton}/>
+                                        </button>
+                                
+                                        <button className="place-items-center" onClick={() => {
+                                            updateStatus({
+                                                ...assignment,
+                                                assign_status: "Completed",
+                                            });
+                                        }}>
+                                            <CircleCheckBig  className="hover:text-[#679436] cursor-pointer shadow-xl" />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
             {showForm && (
-                <AddAssignment courses={courses} setAssignments={setAssignments} onClose={() => {
-                    setShowForm(false); 
-                    getAssignments();
-                }}/>
+                <Modal type="add">
+                    <AddAssignment courses={courses} setAssignments={setAssignments} onClose={() => {
+                        setShowForm(false); 
+                        getAssignments();
+                    }}/>
+                </Modal>
             )}
             {showEdit && (
-                <EditAssignment assignment={assignmentInfo} onClose={() => {
-                    setShowEdit(false); 
-                    getAssignments();
-                }}/>
+                <Modal type="edit">
+                    <EditAssignment assignment={assignmentInfo} onClose={() => {
+                        setShowEdit(false); 
+                        getAssignments();
+                    }}/>
+                </Modal>
             )}
             {showDelete && (
-                <DeleteAssignment assignment={assignmentInfo} onClose={() => {
-                    setShowDelete(false); 
-                    getAssignments();
-                }} />
+                <Modal type="delete">
+                    <DeleteAssignment assignment={assignmentInfo} onClose={() => {
+                        setShowDelete(false); 
+                        getAssignments();
+                    }} />
+                </Modal>
             )}
 
             <CompletedAssignments completedAssignments={completedAssignments} getAssignments={getAssignments} />
-
         </div>
     )
-}
+};
 
 export default Assignments;

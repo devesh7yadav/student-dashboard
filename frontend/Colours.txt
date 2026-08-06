@@ -8,20 +8,24 @@ Buttons ---
 #ADBAC2 - Pale Slate - Back/Exit
 #B3BFB8 - Ash Grey - Clear/No
 #D01117 - Red - Delete/Yes
+#16697A - Stormy Teal - View
 
 Hover ---
-#679436 - Green - Edit
+#679436 - Green - Complete
 #D01117 - Red - Delete
+#16697A - Stormy Teal - Edit 
 #a4c5db - Slate Grey - Table
-#F1F2EB - White - Buttons
+#F1F2EB - White - Button Text
+#74A2BE - Dusk Blue - View Button Text 
 
 Border ---
-#74A2BE - Dusk Blue - Tables/Back 
+#74A2BE - Dusk Blue - Tables/Back/View Grades/Restore
+#679436 - Green - Completed Table
 
 Modal Borders
 #D01117 - Red - Delete
 #679436 - Green - Add
-#74A2BE - Dusk Blue - Edit 
+#74A2BE - Dusk Blue - Edit  
 
 Scrollbar
 #22223B - Indigo - Scrollbar
