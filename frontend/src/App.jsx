@@ -7,7 +7,7 @@ import ExamGrade from "./pages/Calculators/ExamGrade";
 import GradePredictor from "./pages/Calculators/GradePredictor";
 import AverageGrade from "./pages/Calculators/AverageGrade";
 import Login from "./pages/Login";
-import SignUp from "./pages/Signup";
+import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 

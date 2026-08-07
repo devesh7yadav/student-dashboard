@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom";
 import apiFetch from "../utils/apiFetch.js";
+import styles from "../Styles.js";
 
 function SignUp() {
 
@@ -59,52 +60,62 @@ function SignUp() {
     };
 
     return(
-        <div>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="flex-1 px-20">
+            <h1 className={styles.title}>Sign Up</h1>
 
-                <label htmlFor="email">Enter a Email: </label>
-                <input 
-                    className="border"
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange} 
-                />
+            <div>
+                <form onSubmit={handleSubmit}>
 
-                <label htmlFor="password">Enter a Password: </label>
-                <input 
-                    className="border"
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange} 
-                />
+                    <div className="grid place-items-center">
+                        <label className={styles.label} htmlFor="email">Enter a Email: </label>
+                        <input 
+                            className={styles.inputBox}
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange} 
+                        />
+                    </div>
 
-                <label htmlFor="password_check">Retype Password: </label>
-                <input 
-                    className="border"
-                    type="password"
-                    id="password_check"
-                    name="password_check"
-                    value={formData.password_check}
-                    onChange={handleChange} 
-                />
+                    <div className="grid place-items-center mt-8">
+                        <label className={styles.label} htmlFor="password">Enter a Password: </label>
+                        <input 
+                            className={styles.inputBox}
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange} 
+                        />
+                    </div>
 
-                <button type="submit">Submit</button>
+                    <div className="grid place-items-center mt-8">
+                        <label className={styles.label} htmlFor="password_check">Retype Password: </label>
+                        <input 
+                            className={styles.inputBox}
+                            type="password"
+                            id="password_check"
+                            name="password_check"
+                            value={formData.password_check}
+                            onChange={handleChange} 
+                        />
+                    </div>
 
-            </form>
-            <p>{message}</p>
+                    <div className="grid place-items-center mt-8">
+                        <button className={styles.loginButton} type="submit">Sign Up</button>
+                    </div>
 
-            <div className="my-10">
-                <p>Already have an account?</p>
+                </form>
+            </div>
+            <p className={styles.message}>{message}</p>
+
+            <div className="grid place-items-center mt-10">
+                <p className={styles.label}>Already have an account?</p>
                 <Link to="/login">Log In</Link>
             </div>
-
         </div>
     )
-}
+};
 
 export default SignUp;

@@ -28,7 +28,7 @@ const styles = {
     clearButton: "place-items-right rounded-md text-xs md:text-base bg-[#B3BFB8] w-10 md:w-20 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB]",
     submitButton: "rounded-md text-xs md:text-base bg-[#679436] w-12 md:w-20 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] justify-self-end",
     label: "text-xs md:text-base font-bold py-2",
-    inputBox: "rounded-md text-xs md:text-base border px-1",
+    inputBox: "rounded-md text-xs md:text-base border px-1 shadow-lg",
     dropdown: "bg-[#F1F2EB] border rounded-md text-xs md:text-base max-w-15 md:max-w-46",
     message: "text-xs md:text-base text-center pt-4 min-h-10",
     deleteText: "text-xs md:text-base text-center font-bold",
@@ -38,6 +38,14 @@ const styles = {
     //Calculators
     calcBorder: "border-[#74A2BE] border-2 p-8 rounded-md mt-8",
 
+    //Login
+    loginButton: "rounded-md text-xs md:text-base bg-[#ADBAC2] border-[#74A2BE] border-2 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] px-5",
+
+    //Homepage
+    homeText: "text-left font-bold text-xs md:text-base p-4",
+
+    //Navbar
+    navbarText: "text-[#F1F2EB] font-bold",
 };
 
 export default styles;

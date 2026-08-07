@@ -1,6 +1,7 @@
 Backgrounds ---
 #F1F2EB - White - Main Background
 #ADBAC2 - Pale Slate - Header
+#16697A - Stormy Teal - Navbar
 
 Buttons ---
 #74A2BE - Dusk Blue - Add 
@@ -19,7 +20,7 @@ Hover ---
 #74A2BE - Dusk Blue - View Button Text 
 
 Border ---
-#74A2BE - Dusk Blue - Tables/Back/View Grades/Restore/Calculator
+#74A2BE - Dusk Blue - Tables/Back/View Grades/Restore/Calculator/Home
 #679436 - Green - Completed Table
 
 Modal Borders
@@ -32,3 +33,4 @@ Scrollbar
 
 Text
 #ADBAC2 - Pale Slate - Gradebook
+#F1F2EB - White - Navbar
