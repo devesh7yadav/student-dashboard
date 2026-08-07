@@ -85,6 +85,8 @@ function GradePredictor() {
 
     return (
         <div className="flex-1 px-20">
+            <title>Grade Predictor Calculator</title>
+
             <div>
                 <h1 className={styles.title}>Grade Predictor Calculator</h1>
                 <p className={styles.subtitle}>Predict your final grade based on your current grade and your predicted exam grade</p>

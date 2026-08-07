@@ -61,6 +61,8 @@ function SignUp() {
 
     return(
         <div className="flex-1 px-20">
+            <title>Sign Up</title>
+
             <h1 className={styles.title}>Sign Up</h1>
 
             <div>

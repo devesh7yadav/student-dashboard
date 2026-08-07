@@ -58,6 +58,8 @@ function Login() {
 
     return (
         <div className="flex-1 px-20">
+            <title>Login</title>
+
             <h1 className={styles.title}>Login</h1>
 
             <div>

@@ -68,6 +68,8 @@ function AverageGrade () {
 
     return (
         <div className="flex-1 px-20">
+            <title>Average Grade Calculator</title>
+            
             <h1 className={styles.title}>Average Calculator</h1>
 
             <div className="grid grid-cols-[3fr_2fr] gap-x-10">

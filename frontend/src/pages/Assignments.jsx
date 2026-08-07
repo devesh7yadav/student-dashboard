@@ -107,6 +107,7 @@ function Assignments() {
 
     return(
         <div className={styles.alignTable}>
+            <title>Assignments</title>
 
             <div className={styles.alignHeader}>
                 <div />

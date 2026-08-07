@@ -1,4 +1,6 @@
 - Add filters and sort by to the assignments table
-- Style the app
 - Add a 404 page for when a user tries to look at another users gradebook
 - Restyle gradebook and fix message sizing issue when updating
+- Improve styles
+- Add a demo video and screenshots
+- Add a header

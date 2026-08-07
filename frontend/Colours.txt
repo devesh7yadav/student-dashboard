@@ -34,3 +34,6 @@ Scrollbar
 Text
 #ADBAC2 - Pale Slate - Gradebook
 #F1F2EB - White - Navbar
+
+Logo
+#74A2BE - Dusk Blue

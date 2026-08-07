@@ -85,6 +85,8 @@ function ExamGrade() {
 
     return(
         <div className="flex-1 px-20">
+            <title>Exam Grade Calculator</title>
+
             <div>
                 <h1 className={styles.title}>Exam Grade Calculator</h1>
                 <p className={styles.subtitle} >Find the exam grade needed to achieve your target grade</p>

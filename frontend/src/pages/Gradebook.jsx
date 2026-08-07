@@ -92,6 +92,9 @@ function Gradebook() {
 
             const data = await response.json();
             setCourseInfo(data);
+
+            //Sets the tab title
+            document.title = `${data.course_code} Grades`
         };
 
         displayCourseInfo();
@@ -154,7 +157,7 @@ function Gradebook() {
 
     return (
         <div className={styles.alignTable}>
-
+            
             <div className="grid grid-cols-[3fr_2fr] mb-4">
                 <h1 className={styles.title}>{courseInfo.course_code} {courseInfo.course_name}</h1>
                 <div className={styles.alignAddButton}>

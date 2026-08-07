@@ -41,6 +41,7 @@ function Courses() {
 
     return(
       <div className={styles.alignTable}>
+        <title>Courses & Grades</title>
 
         <div className={styles.alignHeader}>
             <div/>
