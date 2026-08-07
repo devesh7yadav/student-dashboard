@@ -19,7 +19,7 @@ Hover ---
 #74A2BE - Dusk Blue - View Button Text 
 
 Border ---
-#74A2BE - Dusk Blue - Tables/Back/View Grades/Restore
+#74A2BE - Dusk Blue - Tables/Back/View Grades/Restore/Calculator
 #679436 - Green - Completed Table
 
 Modal Borders

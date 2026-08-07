@@ -1,5 +1,6 @@
 import { useState } from "react";
 import apiFetch from "../../utils/apiFetch.js";
+import styles from "../../Styles.js";
 
 function AverageGrade () {
 
@@ -66,38 +67,51 @@ function AverageGrade () {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                {assignments.map((assignment, index) => (
-                    <div key={index}>
-                        <input
-                            type="number"
-                            placeholder="Grade"
-                            value={assignment.assign_grade}
-                            onChange={(e) => handleChange(index, "assign_grade", e.target.value)}
-                        />
+        <div className="flex-1 px-20">
+            <h1 className={styles.title}>Average Calculator</h1>
 
-                        <input
-                            type="number"
-                            placeholder="Weight"
-                            value={assignment.assign_weight}
-                            onChange={(e) => handleChange(index, "assign_weight", e.target.value)}
-                        />
+            <div className="grid grid-cols-[3fr_2fr] gap-x-10">
+                <div className={styles.calcBorder}>
+                    <form onSubmit={handleSubmit}>
+                        {assignments.map((assignment, index) => (
+                            <div className="flex gap-x-10 py-2" key={index}>
+                                <input
+                                    className={styles.inputBox}
+                                    type="number"
+                                    placeholder="Grade"
+                                    value={assignment.assign_grade}
+                                    onChange={(e) => handleChange(index, "assign_grade", e.target.value)}
+                                />
 
-                        <button type="button" onClick={() => removeAssignment(index)}>Remove</button>
-                    </div>
-                ))}
+                                <input
+                                    className={styles.inputBox}
+                                    type="number"
+                                    placeholder="Weight"
+                                    value={assignment.assign_weight}
+                                    onChange={(e) => handleChange(index, "assign_weight", e.target.value)}
+                                />
 
-                <button type="button" onClick={addAssignment}>Add</button>
+                                <button className={styles.deleteButton} type="button" onClick={() => removeAssignment(index)}>X</button>
+                            </div>
+                        ))}
 
-                <button type="submit">Submit</button>
-                <button type="reset" onClick={handleReset}>Clear</button>
-            </form>
+                        <div className="grid place-items-center">
+                            <button className="rounded-md text-xs md:text-base mt-4 bg-[#74A2BE] font-bold w-20 cursor-pointer shadow-xl hover:text-[#F1F2EB]" type="button" onClick={addAssignment}>Add</button>
+                        </div>
 
-            <p>{result}</p>
+                        <div className="flex mt-8 gap-x-6">
+                            <button className={styles.clearButton} type="reset" onClick={handleReset}>Clear</button>
+                            <button className={styles.submitButton} type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div className={styles.calcBorder}>   
+                    <p className={styles.message}>{result}</p>
+                </div>
+            </div>
         </div>
     )
-
 };
 
 export default AverageGrade;

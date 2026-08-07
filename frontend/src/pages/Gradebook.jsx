@@ -174,7 +174,7 @@ function Gradebook() {
                     <ArrowBigLeft /> Back
                 </button>
 
-                <h1 className="text-center font-bold text-xs md:text-base">{message}</h1>
+                <h1 className={styles.subtitle} >{message}</h1>
 
                 {showUpdate && (
                     <button className="rounded-md text-xs md:text-base bg-[#679436] w-20 md:w-40 font-bold h-10 cursor-pointer shadow-xl hover:text-[#F1F2EB] hover:scale-105 justify-self-end" 

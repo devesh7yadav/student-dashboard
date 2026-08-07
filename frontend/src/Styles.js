@@ -20,6 +20,7 @@ const styles = {
 
     //Title and header
     title: "text-sm md:text-2xl text-center py-5 font-bold underline px-2",
+    subtitle: "text-center font-bold text-xs md:text-base",
     alignHeader: "grid grid-cols-3 mb-4",
 
     //Modal
@@ -33,6 +34,9 @@ const styles = {
     deleteText: "text-xs md:text-base text-center font-bold",
     yes: "rounded-md cursor-pointer w-12 md:w-20 justify-self-center text-xs md:text-base bg-[#D01117] hover:text-[#F1F2EB] hover:scale-105",
     no: "rounded-md cursor-pointer w-12 md:w-20 justify-self-center text-xs md:text-base bg-[#B3BFB8] hover:text-[#F1F2EB] hover:scale-105",
+
+    //Calculators
+    calcBorder: "border-[#74A2BE] border-2 p-8 rounded-md mt-8",
 
 };
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import apiFetch from "../../utils/apiFetch.js";
+import styles from "../../Styles.js";
 
 function GradePredictor() {
 
@@ -83,56 +84,81 @@ function GradePredictor() {
     };
 
     return (
-        <div>
-            <p>Predict your final grade based on your current grade and your predicted exam grade</p>
+        <div className="flex-1 px-20">
+            <div>
+                <h1 className={styles.title}>Grade Predictor Calculator</h1>
+                <p className={styles.subtitle}>Predict your final grade based on your current grade and your predicted exam grade</p>
+            </div>
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="current_grade">Current Grade: </label>
-                    <input 
-                        type="number" 
-                        id="current_grade"
-                        name="current_grade"
-                        value={formData.current_grade}
-                        onChange={handleChange}
-                    />
+            <div className={styles.calcBorder}>
+                <form onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-3 place-items-center">
+                        <div>
+                            <label className={styles.label} htmlFor="current_grade">Current Grade: </label>
+                            <input 
+                                className={styles.inputBox}
+                                type="number" 
+                                id="current_grade"
+                                name="current_grade"
+                                value={formData.current_grade}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                    <p>Or use one of your courses</p>
+                        <p>Or use one of your courses</p>
 
-                    <select 
-                        name="course_id" 
-                        id="course_id"
-                        value={formData.course_id}
-                        onChange={handleCourseChange}
-                    >
-                    <option value="">Select a course</option>
-                    {courses.map(course => (
-                        <option key={course.course_id} value={course.course_grade}> {course.course_code} </option>
-                    ))}
-                    </select>
-                </div>
+                        <div>
+                            <select 
+                                className={styles.dropdown}
+                                name="course_id" 
+                                id="course_id"
+                                value={formData.course_id}
+                                onChange={handleCourseChange}
+                            >
+                            <option value="">Select a course</option>
+                            {courses.map(course => (
+                                <option key={course.course_id} value={course.course_grade}> {course.course_code} </option>
+                            ))}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 mt-8">
+                        <div>
+                            <label className={styles.label} htmlFor="exam_grade">Exam Grade Prediction: </label>
+                            <input 
+                                className={styles.inputBox}
+                                type="number" 
+                                id="exam_grade"
+                                name="exam_grade"
+                                value={formData.exam_grade}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                <label htmlFor="exam_grade">Exam Grade Prediction: </label>
-                <input 
-                    type="number" 
-                    id="exam_grade"
-                    name="exam_grade"
-                    value={formData.exam_grade}
-                    onChange={handleChange}
-                />
+                        <div>
+                            <label className={styles.label} htmlFor="exam_weight">Final Exam Weight: </label>
+                            <input 
+                                className={styles.inputBox}
+                                type="number" 
+                                id="exam_weight"
+                                name="exam_weight"
+                                value={formData.exam_weight}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    
+                    <div className="flex mt-8 gap-x-6">
+                        <button className={styles.clearButton} type="reset" onClick={handleReset}>Clear</button>
+                        <button className={styles.submitButton} type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
 
-                <label htmlFor="exam_weight">Final Exam Weight: </label>
-                <input 
-                    type="number" 
-                    id="exam_weight"
-                    name="exam_weight"
-                    value={formData.exam_weight}
-                    onChange={handleChange}
-                />
-                <button type="submit">Submit</button>
-                <button type="reset" onClick={handleReset}>Clear</button>
-            </form>
-            <p>Predicted Final Grade: {result}</p>
+            <div className={styles.calcBorder}>
+                <p className={styles.message}>Predicted Final Grade: {result}</p>
+            </div>
         </div>
     )
 };
