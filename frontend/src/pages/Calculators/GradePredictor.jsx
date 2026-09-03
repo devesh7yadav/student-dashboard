@@ -34,7 +34,7 @@ function GradePredictor() {
     //Gets the courses
     useEffect(() => {
         async function getCourses() {
-            const response = await apiFetch("http://localhost:5002/courses");
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses`);
             const data = await response.json();
     
             setCourses(data);
@@ -53,7 +53,7 @@ function GradePredictor() {
             return;
         }
 
-        const response = await apiFetch("http://localhost:5002/calculator/grade-predictor", {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/calculator/grade-predictor`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

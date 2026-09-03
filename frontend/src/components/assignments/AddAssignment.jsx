@@ -39,7 +39,7 @@ function AddAssignment({courses, setAssignments, onClose}) {
             return;
         }
 
-        const response = await apiFetch(`http://localhost:5002/assignments/${formData.course_id}`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments/${formData.course_id}`, {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json", 

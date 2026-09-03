@@ -23,7 +23,7 @@ function Assignments() {
     useEffect(() => {
         //Copied the code to stop the lint from complaining
         async function getAssignments() {
-            const response = await apiFetch("http://localhost:5002/assignments");
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments`);
             const data = await response.json();
 
             setAssignments(data);
@@ -33,7 +33,7 @@ function Assignments() {
     }, []);
 
     async function getAssignments() {
-        const response = await apiFetch("http://localhost:5002/assignments");
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments`);
         const data = await response.json();
 
         setAssignments(data);
@@ -42,7 +42,7 @@ function Assignments() {
     //Displays the courses
     useEffect(() => {
         async function getCourses() {
-            const response = await apiFetch("http://localhost:5002/courses");
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses`);
             const data = await response.json();
 
             setCourses(data);
@@ -79,7 +79,7 @@ function Assignments() {
             assignment.completed_date = new Date();
         }
         
-        const response = await apiFetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments/${assignment.assign_id}`, {
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json", 

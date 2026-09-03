@@ -11,7 +11,7 @@ async function apiFetch(link, options = {} ) {
 
     //If the access token expires
     if (response.status === 401 || response.status === 403) {
-        const refreshResponse = await fetch("http://localhost:5002/auth/refresh", {
+        const refreshResponse = await fetch(`${import.meta.env.VITE_API_URL}/auth/refresh`, {
             method: "GET",
             credentials: "include",
         });

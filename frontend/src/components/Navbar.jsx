@@ -8,7 +8,7 @@ function Navbar() {
     const handleLogout = async (e) => {
         e.preventDefault();
 
-        const response = await apiFetch("http://localhost:5002/auth/logout", {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
             method: "DELETE"
         });
 

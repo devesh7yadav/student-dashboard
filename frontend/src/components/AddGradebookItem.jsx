@@ -26,7 +26,7 @@ function AddGradebookItem({course_id, setAssignments, onClose}) {
             return;
         }
 
-        const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades/create`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades/create`, {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json", 

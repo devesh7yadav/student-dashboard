@@ -23,7 +23,7 @@ function Courses() {
     useEffect(() => {
         //Copied the code to stop the lint from complaining
         async function getCourses() {
-            const response = await apiFetch("http://localhost:5002/courses");
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses`);
             const data = await response.json();
 
             setCourses(data);
@@ -33,7 +33,7 @@ function Courses() {
     }, []);
 
     async function displayCourses() {
-        const response = await apiFetch("http://localhost:5002/courses");
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses`);
         const data = await response.json();
 
         setCourses(data);

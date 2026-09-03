@@ -39,7 +39,7 @@ function SignUp() {
             return;
         }
 
-        const response = await apiFetch("http://localhost:5002/auth/create", {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/auth/create`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

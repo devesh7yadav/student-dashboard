@@ -15,7 +15,7 @@ function CompletedAssignments({completedAssignments, getAssignments}) {
 
     //Restores an assignment
     async function handleRestore(assignment) {
-        const response = await apiFetch(`http://localhost:5002/assignments/${assignment.assign_id}`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments/${assignment.assign_id}`, {
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json", 

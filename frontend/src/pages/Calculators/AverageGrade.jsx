@@ -41,7 +41,7 @@ function AverageGrade () {
             return;
         }
 
-        const response = await apiFetch("http://localhost:5002/calculator/average", {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/calculator/average`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(assignments),

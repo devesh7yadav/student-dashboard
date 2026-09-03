@@ -31,7 +31,7 @@ function EditCourse({course, onClose}) {
             return;
         }
 
-        const response = await apiFetch(`http://localhost:5002/courses/${formData.course_id}`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${formData.course_id}`, {
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json", 

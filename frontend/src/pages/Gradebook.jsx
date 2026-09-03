@@ -66,7 +66,7 @@ function Gradebook() {
     //Displays the grades
     useEffect(() => {
         async function displayGrades() {
-            const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades`);
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades`);
             const data = await response.json();
 
             setAssignments(data);
@@ -75,7 +75,7 @@ function Gradebook() {
         displayGrades();
     }, [course_id]);
     async function displayGrades() {
-        const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades`);
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades`);
         const data = await response.json();
 
         setAssignments(data);
@@ -84,7 +84,7 @@ function Gradebook() {
     //Gets the course info
     useEffect(() => {
         async function displayCourseInfo() {
-            const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades/info`);
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades/info`);
 
             if (!response.ok) {
                 return;
@@ -102,7 +102,7 @@ function Gradebook() {
 
     //Handles the grade and weight change once submitted
     async function handleUpdate() {
-        const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades`, {
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json", 
@@ -124,7 +124,7 @@ function Gradebook() {
     //Gets the average and weight
     useEffect(() => {
         async function getAverage() {
-            const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades/average`);
+            const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades/average`);
 
             if (!response.ok) {
                 return;
@@ -137,7 +137,7 @@ function Gradebook() {
         getAverage();
     }, [course_id]);
     async function getAverage() {
-        const response = await apiFetch(`http://localhost:5002/courses/${course_id}/grades/average`);
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course_id}/grades/average`);
 
         if (!response.ok) {
             return;

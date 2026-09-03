@@ -6,7 +6,7 @@ function DeleteCourse({course, onClose}) {
     const handleDelete = async (e) => {
         e.preventDefault();
 
-        const response = await apiFetch(`http://localhost:5002/courses/${course.course_id}`, {
+        const response = await apiFetch(`${import.meta.env.VITE_API_URL}/courses/${course.course_id}`, {
             method: "DELETE",
         });
 
