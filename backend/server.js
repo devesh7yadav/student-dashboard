@@ -13,8 +13,10 @@ dotenv.config();
 
 const app = express();
 
+//For Local Development
+//http://localhost:5175
 const corsOptions = {
-    origin: ["http://localhost:5175", "https://uni-student-dashboard.vercel.app/login"],
+    origin: "https://uni-student-dashboard.vercel.app",
     credentials: true
 };
 
