@@ -60,18 +60,18 @@ function SignUp() {
     };
 
     return(
-        <div className="flex-1 px-20">
+        <div className="flex-1">
             <title>Sign Up</title>
 
             <h1 className={styles.title}>Sign Up</h1>
 
-            <div>
+            <div className={styles.backgroundCard}>
                 <form onSubmit={handleSubmit}>
 
                     <div className="grid place-items-center">
                         <label className={styles.label} htmlFor="email">Enter a Email: </label>
                         <input 
-                            className={styles.inputBox}
+                            className={styles.loginBox}
                             type="email"
                             id="email"
                             name="email"
@@ -83,7 +83,7 @@ function SignUp() {
                     <div className="grid place-items-center mt-8">
                         <label className={styles.label} htmlFor="password">Enter a Password: </label>
                         <input 
-                            className={styles.inputBox}
+                            className={styles.loginBox}
                             type="password"
                             id="password"
                             name="password"
@@ -95,7 +95,7 @@ function SignUp() {
                     <div className="grid place-items-center mt-8">
                         <label className={styles.label} htmlFor="password_check">Retype Password: </label>
                         <input 
-                            className={styles.inputBox}
+                            className={styles.loginBox}
                             type="password"
                             id="password_check"
                             name="password_check"
@@ -112,9 +112,9 @@ function SignUp() {
             </div>
             <p className={styles.message}>{message}</p>
 
-            <div className="grid place-items-center mt-10">
+            <div className="grid place-items-center">
                 <p className={styles.label}>Already have an account?</p>
-                <Link to="/login">Log In</Link>
+                <Link className="text-xs md:text-base" to="/login">Log In</Link>
             </div>
         </div>
     )

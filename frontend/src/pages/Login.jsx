@@ -56,19 +56,27 @@ function Login() {
         navigate("/");
     };
 
+    //Fills the form with demo credentials
+    const fillForm = () => {
+        setFormData({
+            email: "test123@email.com",
+            password: "test123"
+        });
+    };
+
     return (
-        <div className="flex-1 px-20">
+        <div className="flex-1">
             <title>Login</title>
 
             <h1 className={styles.title}>Login</h1>
 
-            <div>
+            <div className={styles.backgroundCard}>
                 <form onSubmit={handleSubmit}>
 
                     <div className="grid place-items-center">
                         <label className={styles.label} htmlFor="email">Email: </label>
                         <input 
-                            className={styles.inputBox}
+                            className={styles.loginBox}
                             type="email"
                             id="email"
                             name="email"
@@ -80,7 +88,7 @@ function Login() {
                     <div className="grid place-items-center mt-8">
                         <label className={styles.label} htmlFor="password">Password: </label>
                         <input 
-                            className={styles.inputBox}
+                            className={styles.loginBox}
                             type="password"
                             id="password"
                             name="password"
@@ -97,9 +105,13 @@ function Login() {
             </div>
             <p className={styles.message}>{message}</p>
 
-            <div className="grid place-items-center mt-10">
+            <div className="grid place-items-center">
                 <p className={styles.label}>Don't have an account?</p>
-                <Link to="/signup">Sign Up</Link>
+                <Link className="text-xs md:text-base" to="/signup">Sign Up</Link>
+            </div>
+
+            <div className="grid place-items-center mt-6">
+                <button className={styles.loginButton} onClick={fillForm}>Try Demo Account</button>
             </div>
         </div>
     )

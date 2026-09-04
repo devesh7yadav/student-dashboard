@@ -2,6 +2,7 @@ Backgrounds ---
 #F1F2EB - White - Main Background
 #ADBAC2 - Pale Slate - Header
 #16697A - Stormy Teal - Navbar
+#a4c5db - Slate Grey - Login Card
 
 Buttons ---
 #74A2BE - Dusk Blue - Add 

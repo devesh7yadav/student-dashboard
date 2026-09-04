@@ -39,7 +39,9 @@ const styles = {
     calcBorder: "border-[#74A2BE] border-2 p-8 rounded-md mt-8",
 
     //Login
-    loginButton: "rounded-md text-xs md:text-base bg-[#ADBAC2] border-[#74A2BE] border-2 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] px-5",
+    loginButton: "rounded-md text-xs md:text-base bg-[#ADBAC2] border-[#74A2BE] border-4 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] px-5",
+    loginBox: "rounded-md text-xs md:text-base border px-1 shadow-xl h-5 md:h-8 border-2 bg-[#F1F2EB]",
+    backgroundCard: "place-items-center w-fit mx-auto border rounded-xl px-12 py-8 shadow-xl bg-[#a4c5db]",
 
     //Homepage
     homeText: "text-left font-bold text-xs md:text-base p-4",

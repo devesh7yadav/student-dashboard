@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import apiFetch from "../utils/apiFetch.js";
 import styles from "../Styles.js";
+import { House, Calculator, BookOpenCheck, NotebookPen } from 'lucide-react';
+import { Tooltip, Dropdown, DropdownItem } from "flowbite-react";
 
 function Navbar() {
 
@@ -24,23 +26,35 @@ function Navbar() {
     };
 
     return (
-        <div className="relative flex flex-col text-sm md:text-base min-w-24 md:min-w-40 text-center py-10 gap-y-16 shadow-2xl bg-[#16697A]">
-            <Link className={styles.navbarText} to="/">Home</Link>
-            <Link className={styles.navbarText} to="/courses">Courses & Grades</Link>
-            <Link className={styles.navbarText} to="/assignments">Assignments</Link>
+        <div className="relative flex flex-col text-sm md:text-base min-w-16 md:min-w-24 text-center py-10 gap-y-16 shadow-2xl bg-[#16697A]">
+            <div className="flex justify-center">
+                <Tooltip content="Home" style="dark" placement="right" animation="duration-300" className="whitespace-nowrap">
+                    <Link className={styles.navbarText} to="/"> <House className="w-5 h-5 md:w-6 md:h-6"/> </Link>
+                </Tooltip>
+            </div>
 
-            <div className="group text-center">
-                <button className={styles.navbarText}> Calculators ▼ </button>
+            <div className="flex justify-center">
+                <Tooltip content="Courses & Grades" style="dark" placement="right" animation="duration-300" className="whitespace-nowrap">
+                    <Link className={styles.navbarText} to="/courses"> <BookOpenCheck className="w-5 h-5 md:w-6 md:h-6"/> </Link>
+                </Tooltip>
+            </div>
 
-                <div className="hidden group-hover:grid place-items-center py-3 px-2 gap-y-3 border-[#F1F2EB] border-2 w-fit mx-auto rounded-xl">
-                    <Link className={styles.navbarText} to="/calculator/exam-grade"> Exam Grade</Link>
-                    <Link className={styles.navbarText} to="/calculator/grade-predictor"> Grade Predictor </Link>
-                    <Link className={styles.navbarText} to="/calculator/average"> Average Grade</Link>
-                </div>
+            <div className="flex justify-center">
+                <Tooltip content="Assignments" style="dark" placement="right" animation="duration-300" className="whitespace-nowrap">
+                    <Link className={styles.navbarText} to="/assignments"> <NotebookPen className="w-5 h-5 md:w-6 md:h-6" /> </Link>
+                </Tooltip>
+            </div>
+
+            <div className="flex justify-center">
+                <Dropdown label={<Calculator className="w-5 h-5 md:w-6 md:h-6 -mr-2" />}>
+                    <DropdownItem><Link className={styles.navbarText} to="/calculator/exam-grade"> Exam Grade</Link></DropdownItem>
+                    <DropdownItem><Link className={styles.navbarText} to="/calculator/grade-predictor"> Grade Predictor </Link></DropdownItem>
+                    <DropdownItem><Link className={styles.navbarText} to="/calculator/average"> Average Grade</Link></DropdownItem>
+                </Dropdown>
             </div>
 
             <div className="absolute bottom-10 w-full text-center">
-                <button className="cursor-pointer text-[#F1F2EB] font-bold" onClick={handleLogout}>Logout</button>
+                <button className="cursor-pointer text-[#F1F2EB] font-bold text-xs md:text-base" onClick={handleLogout}>Logout</button>
             </div>
         </div>
     )

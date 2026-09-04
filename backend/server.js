@@ -15,6 +15,7 @@ const app = express();
 
 //For Local Development
 //http://localhost:5175
+//https://uni-student-dashboard.vercel.app
 const corsOptions = {
     origin: "https://uni-student-dashboard.vercel.app",
     credentials: true

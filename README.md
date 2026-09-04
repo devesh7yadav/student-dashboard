@@ -1,6 +1,9 @@
 # Student Dashboard
 A dashboard designed to help students stay organized during the school year. Includes an assignment tracker, course grade tracking, and calculators. Uses PostgreSQL and includes user authentication.
 
+## Website
+[Live Link](https://uni-student-dashboard.vercel.app/)
+
 ## Features
 - **Assignment Tracker:** Track your assignments with information such as course code, name, due date, type, priority, status, weight, and notes. Completed assignments can also be viewed.
 - **Courses & Gradebook:** Keep track of your averages with a gradebook for each of your courses.
@@ -26,3 +29,4 @@ A dashboard designed to help students stay organized during the school year. Inc
 - Tailwind CSS
 - date-fns
 - Lucide React
+- Flowbite React
