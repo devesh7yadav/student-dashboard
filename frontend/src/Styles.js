@@ -9,14 +9,14 @@ const styles = {
     //Table
     alignTable: "mx-auto overflow-x-auto p-4",
     tableBorder: "overflow-x-auto rounded-lg border-[#74A2BE] border-x-2 border-t-2 shadow-xl",
-    tableHeader: "text-sm md:text-base lg:px-8 py-4 bg-[#ADBAC2] font-semibold",
-    tableBody: "text-sm md:text-base text-center lg:px-8 border-[#74A2BE] border-b-2",
+    tableHeader: "text-xs md:text-base lg:px-8 py-4 bg-[#ADBAC2] font-semibold",
+    tableBody: "text-xs md:text-base text-center lg:px-8 border-[#74A2BE] border-b-2",
     tableRow: "hover:bg-[#a4c5db] transition-colors duration-400 ease-in-out h-16",
 
     //Assignment Table
-    assignTableHeader: "text-sm md:text-base lg:px-4 py-4 bg-[#ADBAC2] font-semibold",
-    assignTableBody: "text-sm md:text-base text-center lg:px-2 border-[#74A2BE] border-b-2",
-    completedTableBody: "text-sm md:text-base text-center lg:px-2 border-[#679436] border-b-2",
+    assignTableHeader: "text-xs md:text-base lg:px-4 py-4 bg-[#ADBAC2] font-semibold",
+    assignTableBody: "text-xs md:text-base text-center lg:px-2 border-[#74A2BE] border-b-2",
+    completedTableBody: "text-xs md:text-base text-center lg:px-2 border-[#679436] border-b-2",
 
     //Title and header
     title: "text-sm md:text-2xl text-center py-5 font-bold underline px-2",
@@ -36,7 +36,8 @@ const styles = {
     no: "rounded-md cursor-pointer w-12 md:w-20 justify-self-center text-xs md:text-base bg-[#B3BFB8] hover:text-[#F1F2EB] hover:scale-105",
 
     //Calculators
-    calcBorder: "border-[#74A2BE] border-2 p-8 rounded-md mt-8",
+    calcBorder: "border-[#74A2BE] border-2 p-4 md:p-8 rounded-md mt-4 md:mt-8",
+    calcSubmitButton: "rounded-md text-xs md:text-base bg-[#679436] w-16 md:w-24 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] justify-self-end",
 
     //Login
     loginButton: "rounded-md text-xs md:text-base bg-[#ADBAC2] border-[#74A2BE] border-4 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] px-5",

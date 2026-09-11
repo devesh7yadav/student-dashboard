@@ -170,7 +170,7 @@ function Gradebook() {
                 <p>Total Weight Completed: {currentInfo.total_weight}% </p>
             </div>
 
-            <div className="grid grid-cols-3 py-4">
+            <div className="grid grid-cols-[1fr_4fr_1fr] py-4 min-w-100 md:min-w-250">
                 <button className="grid grid-cols-2 place-items-center rounded-md text-xs md:text-base bg-[#ADBAC2] border-[#74A2BE] border-2 max-w-24 font-bold cursor-pointer shadow-xl hover:text-[#F1F2EB] h-10" 
                     onClick={() => navigate("/courses")}
                 >
@@ -189,7 +189,7 @@ function Gradebook() {
             </div>
 
             <div className={styles.tableBorder}>
-                <table className="w-full table-auto">
+                <table className="w-full">
                     <thead>
                         <tr>
                             <th className={styles.tableHeader}>Name</th>
@@ -207,20 +207,22 @@ function Gradebook() {
                                 <td className={styles.tableBody}>{displayDate(assignment.completed_date)}</td>
                                 <td className={styles.tableBody}>
                                     <input 
-                                        className="w-20 text-center"
+                                        className="w-20 text-center border-2 border-[#74A2BE] rounded-lg"
                                         type="number"
                                         id="grade"
                                         name="grade"
+                                        placeholder="Grade"
                                         value={assignment.assign_grade}
                                         onChange={(e) => handleChange(e, assignment, "assign_grade")}
                                     />
                                 </td>
                                 <td className={styles.tableBody}>
                                     <input 
-                                        className="w-20 text-center"
+                                        className="w-20 text-center border-2 border-[#74A2BE] rounded-lg"
                                         type="number"
                                         id="weight"
                                         name="weight"
+                                        placeholder="Weight"
                                         value={assignment.assign_weight}
                                         onChange={(e) => handleChange(e, assignment, "assign_weight")}
                                     />

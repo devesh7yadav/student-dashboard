@@ -120,7 +120,7 @@ function Assignments() {
             </div>
 
             <div className={styles.tableBorder}>
-                <table>
+                <table className="min-w-100 md:min-w-250">
                     <thead>
                         <tr>
                             <th className={styles.assignTableHeader}>Course</th>

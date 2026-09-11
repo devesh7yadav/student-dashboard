@@ -10,7 +10,7 @@ function GradePredictor() {
         exam_grade: "",
         exam_weight: "",
     });
-    const [result, setResult] = useState(null);
+    const [result, setResult] = useState("Predicted Final Grade:");
     const [courses, setCourses] = useState([]);
 
     //Updates the textboxes
@@ -70,12 +70,12 @@ function GradePredictor() {
             return;
         }
 
-        setResult(data.grade + "%");
+        setResult("Predicted Final Grade: " + data.grade + "%");
     };
 
     //Resets the form
     const handleReset = () => {
-        setResult(null);
+        setResult("Predicted Final Grade:");
         setFormData({
             current_grade: "",
             exam_grade: "",
@@ -94,7 +94,7 @@ function GradePredictor() {
 
             <div className={styles.calcBorder}>
                 <form onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-3 place-items-center">
+                    <div className="grid md:grid-cols-3 md:place-items-center">
                         <div>
                             <label className={styles.label} htmlFor="current_grade">Current Grade: </label>
                             <input 
@@ -107,11 +107,11 @@ function GradePredictor() {
                             />
                         </div>
 
-                        <p>Or use one of your courses</p>
+                        <p className="text-xs md:text-base my-2">Or use one of your courses</p>
 
                         <div>
                             <select 
-                                className={styles.dropdown}
+                                className="bg-[#F1F2EB] border rounded-md text-xs md:text-base md:max-w-46"
                                 name="course_id" 
                                 id="course_id"
                                 value={formData.course_id}
@@ -125,7 +125,7 @@ function GradePredictor() {
                         </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 mt-8">
+                    <div className="grid md:grid-cols-2 mt-4 md:mt-8">
                         <div>
                             <label className={styles.label} htmlFor="exam_grade">Exam Grade Prediction: </label>
                             <input 
@@ -153,13 +153,13 @@ function GradePredictor() {
                     
                     <div className="flex mt-8 gap-x-6">
                         <button className={styles.clearButton} type="reset" onClick={handleReset}>Clear</button>
-                        <button className={styles.submitButton} type="submit">Submit</button>
+                        <button className={styles.calcSubmitButton} type="submit">Calculate</button>
                     </div>
                 </form>
             </div>
 
             <div className={styles.calcBorder}>
-                <p className={styles.message}>Predicted Final Grade: {result}</p>
+                <p className="text-xs md:text-base text-center">{result}</p>
             </div>
         </div>
     )

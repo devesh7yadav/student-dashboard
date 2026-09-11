@@ -3,7 +3,6 @@ import apiFetch from "../../utils/apiFetch.js";
 import styles from "../../Styles.js";
 
 function AddAssignment({courses, setAssignments, onClose}) {
-    console.log("AddAssignment loaded");
 
     //Hooks
     const [formData, setFormData] = useState({
@@ -37,7 +36,9 @@ function AddAssignment({courses, setAssignments, onClose}) {
         if (!formData.assign_name){
             setMessage("Enter a name");
             return;
-        }
+        } else if (!formData.course_id){
+            setMessage("Select a course");
+        };
 
         const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments/${formData.course_id}`, {
             method: "POST",

@@ -58,7 +58,7 @@ function CompletedAssignments({completedAssignments, getAssignments}) {
                     </div>
                     
                     <div className="overflow-x-auto rounded-lg border-[#679436] border-x-2 border-t-2 shadow-xl">
-                        <table>
+                        <table className="min-w-100 md:min-w-180">
                             <thead>
                                 <tr>
                                     <th className={styles.assignTableHeader}>Course</th>

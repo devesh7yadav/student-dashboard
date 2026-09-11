@@ -46,7 +46,7 @@ function Navbar() {
             </div>
 
             <div className="flex justify-center">
-                <Dropdown label={<Calculator className="w-5 h-5 md:w-6 md:h-6 -mr-2" />}>
+                <Dropdown label={<Calculator className="w-5 h-5 md:w-6 md:h-6 -mr-2 cursor-pointer" />}>
                     <DropdownItem><Link className={styles.navbarText} to="/calculator/exam-grade"> Exam Grade</Link></DropdownItem>
                     <DropdownItem><Link className={styles.navbarText} to="/calculator/grade-predictor"> Grade Predictor </Link></DropdownItem>
                     <DropdownItem><Link className={styles.navbarText} to="/calculator/average"> Average Grade</Link></DropdownItem>

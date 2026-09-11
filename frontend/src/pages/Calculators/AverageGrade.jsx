@@ -8,7 +8,8 @@ function AverageGrade () {
     const [assignments, setAssignments] = useState([
         { assign_grade: "", assign_weight: ""}
     ]);
-    const [result, setResult] = useState(null);
+    const [average, setAverage] = useState("Average: ");
+    const [weight, setWeight] = useState("Total Weight: ");
 
     //Add an assignment
     const addAssignment = () => {
@@ -21,7 +22,8 @@ function AverageGrade () {
     //Remove an assignment
     const removeAssignment = (index) => {
         setAssignments(prev => prev.filter((_, i) => i !== index));
-        setResult(null);
+        setAverage("Average: ");
+        setWeight("Total Weight: ");
     }
 
     //Handles textbox changes
@@ -37,7 +39,8 @@ function AverageGrade () {
 
         //Checks for empty fields
         if (assignments.some(e => e.assign_grade === "") || assignments.some(e => e.assign_weight === "") ) {
-            setResult("Missing field(s)");
+            setAverage("Missing field(s)");
+            setWeight(null);
             return;
         }
 
@@ -50,35 +53,38 @@ function AverageGrade () {
         const data = await response.json();
 
         if(!response.ok) {
-            setResult(data.message);
+            setAverage(data.message);
+            setWeight(null);
             return;
         }
 
-        setResult(`
-            Average: ${data.average}%
-            Total Weight: ${data.total_weight}%
-            `);
+        setAverage("Average: " + data.average);
+        setWeight("Total Weight: " + data.total_weight);
     };
 
     //Resets all the fields
     const handleReset = () => {
         setAssignments([{ assign_grade: "", assign_weight: "" }]);
-        setResult(null);
+        setAverage("Average: ");
+        setWeight("Total Weight: ");
     };
 
     return (
-        <div className="flex-1 px-20">
+        <div className="flex-1 px-5 md:px-20">
             <title>Average Grade Calculator</title>
             
-            <h1 className={styles.title}>Average Calculator</h1>
+            <div>
+                <h1 className={styles.title}>Average Calculator</h1>
+                <p className={styles.subtitle}>Enter your grades and weights to calculate your average</p>
+            </div>
 
-            <div className="grid grid-cols-[3fr_2fr] gap-x-10">
+            <div>
                 <div className={styles.calcBorder}>
                     <form onSubmit={handleSubmit}>
                         {assignments.map((assignment, index) => (
-                            <div className="flex gap-x-10 py-2" key={index}>
+                            <div className="grid grid-cols-[3fr_3fr_1fr] md:gap-x-10 py-2" key={index}>
                                 <input
-                                    className={styles.inputBox}
+                                    className="rounded-md text-xs md:text-base border px-1 shadow-lg w-20 md:w-full"
                                     type="number"
                                     placeholder="Grade"
                                     value={assignment.assign_grade}
@@ -86,14 +92,14 @@ function AverageGrade () {
                                 />
 
                                 <input
-                                    className={styles.inputBox}
+                                    className="rounded-md text-xs md:text-base border px-1 shadow-lg w-20 md:w-full"
                                     type="number"
                                     placeholder="Weight"
                                     value={assignment.assign_weight}
                                     onChange={(e) => handleChange(index, "assign_weight", e.target.value)}
                                 />
 
-                                <button className={styles.deleteButton} type="button" onClick={() => removeAssignment(index)}>X</button>
+                                <button className="hover:text-[#D01117] cursor-pointer" type="button" onClick={() => removeAssignment(index)}>X</button>
                             </div>
                         ))}
 
@@ -103,13 +109,14 @@ function AverageGrade () {
 
                         <div className="flex mt-8 gap-x-6">
                             <button className={styles.clearButton} type="reset" onClick={handleReset}>Clear</button>
-                            <button className={styles.submitButton} type="submit">Submit</button>
+                            <button className={styles.calcSubmitButton} type="submit">Calculate</button>
                         </div>
                     </form>
                 </div>
 
                 <div className={styles.calcBorder}>   
-                    <p className={styles.message}>{result}</p>
+                    <p className={styles.message}>{average}</p>
+                    <p className={styles.message}>{weight}</p>
                 </div>
             </div>
         </div>

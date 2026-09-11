@@ -54,7 +54,7 @@ function Courses() {
         </div>
 
         <div className={styles.tableBorder}>
-            <table>
+            <table className="min-w-100 md:min-w-200">
                 <thead>
                     <tr>
                         <th className={styles.tableHeader}>Course Code</th>
