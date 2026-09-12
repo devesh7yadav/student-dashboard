@@ -59,10 +59,16 @@ const loginUser = async (req, res) => {
         if(!validPassword) {
             return res.status(401).json({error: "Incorrect Password"});
         }
+
+        const cookieOptions = {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        };
         
         //JWT Token
         let tokens = jwtTokens(users.rows[0]);
-        res.cookie('refresh_token', tokens.refreshToken, {httpOnly:true});
+        res.cookie('refresh_token', tokens.refreshToken, cookieOptions);
         res.json(tokens);
 
     } catch (error) {
@@ -82,7 +88,14 @@ const refreshUserToken = async (req, res) => {
                 return res.status(403).json({error: error.message});
             }
             let tokens = jwtTokens(user);
-            res.cookie('refresh_token', tokens.refreshToken, {httpOnly:true});
+
+            const cookieOptions = {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none"
+            };
+
+            res.cookie('refresh_token', tokens.refreshToken, cookieOptions);
             res.json({accessToken: tokens.accessToken});
         })
     } catch (error) {
