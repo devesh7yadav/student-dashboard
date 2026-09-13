@@ -24,7 +24,20 @@ function Assignments() {
         //Copied the code to stop the lint from complaining
         async function getAssignments() {
             const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments`);
-            const data = await response.json();
+            let data = await response.json();
+
+            data.sort((a, b) => {
+                //Filters assignments with no due dates
+                if (a.due_date == null) {
+                    return 1
+                };
+                
+                if (b.due_date == null) {
+                    return -1
+                };
+
+                return a.due_date.localeCompare(b.due_date);
+            });
 
             setAssignments(data);
         }
@@ -34,7 +47,20 @@ function Assignments() {
 
     async function getAssignments() {
         const response = await apiFetch(`${import.meta.env.VITE_API_URL}/assignments`);
-        const data = await response.json();
+        let data = await response.json();
+
+        data.sort((a, b) => {
+            //Filters assignments with no due dates
+            if (a.due_date == null) {
+                return 1
+            };
+
+            if (b.due_date == null) {
+                return -1
+            };
+
+            return a.due_date.localeCompare(b.due_date);
+        });
 
         setAssignments(data);
     };
@@ -66,7 +92,7 @@ function Assignments() {
             return null
         } else if (isPast(date)) {
             return "(Overdue)";
-        }  else {
+        } else {
             return `(${formatDistanceToNow(date)} left)`
         }
     };
@@ -112,7 +138,7 @@ function Assignments() {
             <div className={styles.alignHeader}>
                 <div />
 
-                <h1 className={styles.title}>Your Assignments</h1>
+                <h1 className={styles.title}>Assignments</h1>
 
                 <div className={styles.alignAddButton}>
                     <button className={styles.addButton} onClick={() => setShowForm(true)}> + Add Assignment </button>

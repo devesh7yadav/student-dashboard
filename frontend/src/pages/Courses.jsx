@@ -46,7 +46,7 @@ function Courses() {
         <div className={styles.alignHeader}>
             <div/>
 
-            <h1 className={styles.title}>Your Courses</h1>
+            <h1 className={styles.title}>Courses</h1>
 
             <div className={styles.alignAddButton}>
                 <button className={styles.addButton} onClick={() => setShowForm(true)}> + Add Course </button>

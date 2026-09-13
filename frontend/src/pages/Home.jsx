@@ -10,7 +10,7 @@ function Home() {
 
             <div className="border-[#74A2BE] border-2 rounded-md shadow-xl">
                 <p className={styles.homeText}>
-                    Track each of your course grades in the Courses & Grades section. Add your courses and view your grades in the gradebook.
+                    Track your course grades in the Courses & Grades section. Add your courses and view your grades in the gradebook.
                 </p>
 
                 <p className={styles.homeText}>
